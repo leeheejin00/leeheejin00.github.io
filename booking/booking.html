@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="./css/booking.css">
+    <script src="./js/booking.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/loginTab.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchIcon = document.getElementById('searchIcon');
+            const searchInput = document.getElementById('searchInput');
+
+            searchIcon.addEventListener('click', function() {
+                const query = searchInput.value;
+                if (query === '경복궁') {
+                    window.location.href = '../index_search/index_search.html';
+                } else {
+                    alert('Please enter "경복궁" to search.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('languageIcon').addEventListener('click', function(event) {
+        event.preventDefault();
+        var languageSelect = document.getElementById('languageSelect');
+        if (languageSelect.style.display === 'none' || languageSelect.style.display === '') {
+            languageSelect.style.display = 'block';
+        } else {
+            languageSelect.style.display = 'none';
+        }
+    });
+    </script>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var searchIcon = document.getElementById("searchIcon");
+        var searchInput = document.getElementById("searchInput");
+
+        searchIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (searchInput.style.display === "none" || searchInput.style.display === "") {
+                searchInput.style.display = "block";
+                searchInput.focus();
+            } else {
+                searchInput.style.display = "none";
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            if (!searchInput.contains(event.target) && !searchIcon.contains(event.target)) {
+                searchInput.style.display = "none";
+            }
+        });
+    });
+    </script>
+
+    <script>
+        function submitForm() {
+            document.querySelector('form').submit();
+        }
+
+        function validateSearch() {
+            const searchInput = document.getElementById('find').value.trim();
+            if (searchInput === '') {
+                alert('검색어를 입력하세요.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            const toggleBtn = document.querySelector('.menu-toggle-btn');
+            const sideMenu = document.getElementById('side-menu');
+            const closeBtn = document.querySelector('.close-btn');
+
+            toggleBtn.addEventListener('click', function() {
+                if (sideMenu.style.right === '0px') {
+                    sideMenu.style.right = '-50%'; 
+                    toggleBtn.classList.remove('open'); 
+                } else {
+                    sideMenu.style.right = '0'; 
+                    toggleBtn.classList.add('open'); 
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                sideMenu.style.right = '-50%'; 
+                toggleBtn.classList.remove('open'); 
+            });
+        };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.gnb > li > a');
+        const header = document.querySelector('header');
+
+        menuItems.forEach(item => {
+            item.addEventListener('mouseover', function (e) {
+                e.preventDefault();
+                const submenu = this.nextElementSibling;
+                let allSubmenus = document.querySelectorAll('.submenu');
+
+                allSubmenus.forEach(sub => {
+                    if (sub !== submenu) {
+                        sub.classList.remove('open');
+                        sub.style.maxHeight = null;
+                    }
+                });
+
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.toggle('open');
+                    if (submenu.classList.contains('open')) {
+                        submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    } else {
+                        submenu.style.maxHeight = null;
+                    }
+
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
+                }
+            });
+
+            item.parentElement.addEventListener('mouseleave', function () {
+                const submenu = item.nextElementSibling;
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.remove('open');
+                    submenu.style.maxHeight = null;
+
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        const allSubmenus = document.querySelectorAll('.submenu');
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
+                }
+            });
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-icon">
+                <a href="../index.html"><img src="../images/header_logo.png" alt="header_logo"></a>
+                
+                <div class="search-menu">
+                    <div style="display: flex; align-items: center;">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ko">Korean</option>
+                            <option value="jp">Japanese</option>
+                        </select>
+                        <a href="#" id="intranet-icon"><img src="../images/internet.png" alt=""></a>
+                    </div>
+                    <a href="#" id="login-toggle"><img src="../images/korean-hat.png" alt=""></a>
+                    <a href="#"><img id="searchIcon" src="../images/search.png" alt="search"></a>
+                    <div class="menu-toggle-btn">
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                    </div>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+                </div> <!-- search-menu -->
+            </div> <!-- logo-icon -->
+            <script>
+                document.getElementById('intranet-icon').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var selectMenu = document.getElementById('language-select');
+                    if (selectMenu.style.display === 'none' || selectMenu.style.display === '') {
+                        selectMenu.style.display = 'block';
+                    } else {
+                        selectMenu.style.display = 'none';
+                    }
+                });
+                </script>
+            <div id="side-menu" class="side-menu">
+                <div class="language-login">
+                    <div class="language">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ko">Korean</option>
+                            <option value="jp">Japanese</option>
+                        </select>
+                    </div>
+                    <div class="login">
+                        <a href="#" id="mobile-login-toggle">로그인</a>
+                        <a href="#"><img src="../images/login-white.png" alt="login"></a>
+                    </div>
+                </div> 
+                <script>
+                    document.addEventListener('DOMContentLoaded', (event) => {
+                const languageSelect = document.getElementById('language-select');
+                
+                languageSelect.addEventListener('click', () => {
+                    languageSelect.size = languageSelect.size === 1 ? 4 : 1;
+                });
+                
+                languageSelect.addEventListener('blur', () => {
+                    languageSelect.size = 1;
+                });
+            });
+                </script>
+                <nav class="side-nav">
+                    <ul class="gnb">
+                        <li>
+                            <a href="#"><img src="./images/side-menu-icon.png" alt="">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="../main-info/main-info.html">소개·연혁</a></li>
+                                <li><a href="../fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li class="palace-menu">
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">서울 속 고궁</a>
+                            <ul class="submenu">
+                                <div class="palace1">
+                                    <li><a href="../place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="../place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="../place_detail/place_detail_03.html">덕수궁</a></li>
+                                </div>
+                                <div class="palace2">
+                                    <li><a href="../place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="../place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="../place_detail/place_detail_06.html">종묘</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="../gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="../gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="../notice/notice.html">공지사항</a></li>
+                                <li><a href="../press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="../booking/booking.html">예매하기</a></li>
+                                <li><a href="../booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu_box">
+                <nav class="mainmenu">
+                    <ul class="gnb">
+                        <li>
+                            <a href="#">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="../main-info/main-info.html">소개.연혁</a></li>
+                                <li><a href="../fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">서울 속 고궁</a>
+                                <ul class="submenu">
+                                    <li><a href="../place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="../place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="../place_detail/place_detail_03.html">덕수궁</a></li>
+                                    <li><a href="../place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="../place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="../place_detail/place_detail_06.html">종묘</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="../gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="../gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="../notice/notice.html">공지사항</a></li>
+                                <li><a href="../press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="../booking/booking.html">예매하기</a></li>
+                                <li><a href="../booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <form action="../index_search/index_search.html" method="get" onsubmit="return validateSearch()">
+                    <div class="search-box">
+                        <label for="find"></label>
+                        <input type="search" id="find" name="find" value="경복궁" />
+                        <div class="search" onclick="submitForm()">
+                            <img src="../images/search.png" alt="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="modal-overlay"></div>   
+
+        <div class="form">
+    
+            <ul class="tab-group">
+              <li class="tab active"><a href="#signup">회원가입</a></li>
+              <li class="tab"><a href="#login">로그인</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div id="signup">   
+                <h1>무료로 회원가입 하세요!</h1>
+                
+                <form action="/" method="post">
+                
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>
+                      성<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label>
+                      이름<span class="req">*</span>
+                    </label>
+                    <input type="text"required autocomplete="off"/>
+                  </div>
+                </div>
+      
+                <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email"required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호 설정<span class="req">*</span>
+                  </label>
+                  <input type="password"required autocomplete="off"/>
+                </div>
+                
+                <button type="submit" class="button button-block">Get Started</button>
+                
+                </form>
+      
+              </div>
+              
+              <div id="login">   
+                <h1>환영합니다!</h1>
+                
+                <form id="login-form" action="login.php" method="post">
+                
+                  <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email" id="login-email" name="login-email" required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호<span class="req">*</span>
+                  </label>
+                  <input type="password" id="login-password" name="login-password" required autocomplete="off"/>
+                </div>
+                
+                <p class="forgot"><a href="#">혹시 비밀번호를 잊으셨나요?</a></p>
+                
+                <button class="button button-block">Log In</button>
+                
+                </form>
+      
+              </div>
+              
+            </div><!-- tab-content -->
+            
+      </div> <!-- /form -->
+
+    <main>
+        <div class="container">
+            <section class="title">
+                <h2>예매하기</h2>
+            </section><!-- title -->
+        </div> <!-- container -->
+        
+        <section class="popular">
+            <div class="container">
+                <p class="desc">자세히보기 버튼을 클릭하면 예매 상세 페이지에서 예매가 가능합니다.</p>
+            </div>
+            <ul class="poster">
+                <li class="program1" onclick="selectItem(0)">
+                    <img src="../program_detail/images/star_pst0319.jpg" alt="경복궁 별빛야행">
+                </li>
+                <li class="program2" onclick="selectItem(1)">
+                    <img src="./images/poster1.jpg" alt="경복궁 생과방">
+                </li>
+                <li class="program3" onclick="selectItem(2)">
+                    <img src="../program_detail/images/sgb_main_720.jpg" alt="밤의 석조전">
+                </li>
+                <li class="program4" onclick="selectItem(3)">
+                    <img src="../program_detail/images/child_main_720.jpg" alt="궁중직업실록">
+                </li>
+                <li class="program5" onclick="selectItem(4)">
+                    <img src="../program_detail/images/morning_main_720.jpg" alt="아침 궁을 깨우다">
+                </li>
+            </ul>
+        
+            <div class="slide-box">
+                <div>&nbsp;</div>
+                <div class="selected">&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+            </div>
+        
+            <div class="program-desc-box">
+                <div id="desc1" class="program-desc">
+                    <div class="title">
+                        <p class="name">경복궁 별빛야행</p>
+                        <p class="tag">
+                            <span class="ongoing">진행</span>
+                            <span class="experience">체험</span>
+                            <span class="book">사전예약</span>
+                        </p>
+                    </div>
+                    <div class="place-period">
+                        <p class="place">경복궁 별빛야행</p>
+                        <p class="period">2024.04.17 ~ 2024.06.24</p>
+                    </div>
+                    <div class="detail">
+                        <p>은은한 별빛 아래 경복궁 소주방에서 국악 공연을 즐기며 왕과 왕비의 최고의 일상식이었던 도슭 수라상을 맛보세요. 별빛 가득한 4월의 밤, 경복궁의 문이 열립니다.<br> <br>
+                        경복궁 별빛야행은 장고, 집옥재와 팔우정, 건청궁을 거치며 궁궐의 옛 이야기를 마주하고 쏟아지는 별빛아래에서 향원정의 정취를 느껴볼 수 있는 야간 체험 프로그램입니다.</p>
+                    </div>
+                    <div class="button">
+                        <!-- <button class="go-page">자세히보기</button> -->
+                        <button class="book" onclick="openPopup()">예매하기</button>
+                    </div>
+                </div>
+
+                <div id="desc2" class="program-desc selected">
+                    <div class="title">
+                        <p class="name">경복궁 생과방</p>
+                        <p class="tag">
+                            <span class="ongoing">진행</span>
+                            <span class="experience">체험</span>
+                            <span class="book">사전예약</span>
+                        </p>
+                    </div>
+                    <div class="place-period">
+                        <p class="place">경복궁 생과방</p>
+                        <p class="period">2024.04.17 ~ 2024.06.24</p>
+                    </div>
+                    <div class="detail">
+                        <p>경복궁 소주방 전각에 위치한 '생과방'은 궁중의 육처소 가운데 하나이며, '국왕과 왕비'의 후식과 별식을 준비하던 곳으로 '생물방' 혹은 '생것방'이라고도 불렸습니다. <br> <br> 경복궁 생과방 프로그램은 조선왕조실록의 내용을 토대로 실제 임금이 드셨던 궁중병과와 궁중약차를 오늘날에도 즐길 수 있도록 구성된 체험 프로그램입니다.</p>
+                    </div>
+                    <div class="button">
+                        <!-- <button class="go-page">자세히보기</button> -->
+                        <button class="book" onclick="openPopup()">예매하기</button>
+                    </div>
+                </div>
+
+                <div id="desc3" class="program-desc">
+                    <div class="title">
+                        <p class="name">밤의 석조전</p>
+                        <p class="tag">
+                            <span class="ongoing">진행</span>
+                            <span class="experience">체험</span>
+                            <span class="book">사전예약</span>
+                        </p>
+                    </div>
+                    <div class="place-period">
+                        <p class="place">밤의 석조전</p>
+                        <p class="period">2024.04.17 ~ 2024.06.24</p>
+                    </div>
+                    <div class="detail">
+                        <p>석조전에 담긴 황실의 일상을 엿보고 석조전 테라스에 준비된 가배(커피)와 서양 디저트를 맛보며, 귀빈을 맞이하던 접견실에서 뮤지컬 공연까지 관람해 보세요!<br> <br>
+                        밤의 석조전은 전문 해설사와 함께하는 석조전 야간 탐방 및 테라스 카페 체험, 귀빈을 맞이했던 접견실을 배경으로 하는 대한제국 배경 창작 뮤지컬 공연이 결합된 야간 체험 프로그램입니다.</p>
+                    </div>
+                    <div class="button">
+                        <!-- <button class="go-page" >자세히보기</button> -->
+                        <button class="book" onclick="openPopup()">예매하기</button>
+                    </div>
+                </div>
+
+                <div id="desc4" class="program-desc">
+                    <div class="title">
+                        <p class="name">궁중직업실록</p>
+                        <p class="tag">
+                            <span class="ongoing">진행</span>
+                            <span class="experience">체험</span>
+                            <span class="book">사전예약</span>
+                        </p>
+                    </div>
+                    <div class="place-period">
+                        <p class="place">궁중직업실록</p>
+                        <p class="period">2024.04.17 ~ 2024.06.24</p>
+                    </div>
+                    <div class="detail">
+                        <p>푸르른 봄, 가족 화합의 상징 창경궁에서 특별한 활동지와 함께 궁궐 여기저기를 누비며 우리 삶 속에 한걸음 더 가까워진 역사의 가치와 의미를 되새겨 보세요.<br> <br>
+                        궁중직업실록은 과거 궁궐의 다양한 직업을 직접 경험하며, 선조들의 지혜화 삶의 방식을 알아가는 어린이 대상 프로그램입니다.</p>
+                    </div>
+                    <div class="button">
+                        <!-- <button class="go-page">자세히보기</button> -->
+                        <button class="book" onclick="openPopup()">예매하기</button>
+                    </div>
+                </div>
+
+                <div id="desc5" class="program-desc">
+                    <div class="title">
+                        <p class="name">아침 궁을 깨우다</p>
+                        <p class="tag">
+                            <span class="ongoing">진행</span>
+                            <span class="experience">체험</span>
+                            <span class="book">사전예약</span>
+                        </p>
+                    </div>
+                    <div class="place-period">
+                        <p class="place">아침 궁을 깨우다</p>
+                        <p class="period">2024.04.17 ~ 2024.06.24</p>
+                    </div>
+                    <div class="detail">
+                        <p>평소 걸어보지 못했던, 회화나무와 살구, 매화꽃이 예쁘게 물든 창덕궁의 왕과 왕비의 봄날 산책길을 따라 걸으며 그 속에 담긴 이야기를 나눠보세요.<br> <br>
+                        아침 궁을 깨우다는 따스한 봄날, 산책 가이드와 창덕궁 숲길을 천천히 걸어보며 아침 풍경을 감상해 보는 산책 투어 프로그램입니다..</p>
+                    </div>
+                    <div class="button">
+                        <!-- <button class="go-page">자세히보기</button> -->
+                        <button class="book" onclick="openPopup()">예매하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="poster-web-container">
+                <ul class="poster-web">
+                    <li class="program1">
+                        <a href="../program_detail/program_detail_star.html">
+                            <img src="../program_detail/images/star_pst0319.jpg" alt="경복궁 별빛야행">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_star.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program2">
+                        <a href="../program_detail/program_detail_sgb.html">
+                            <img src="./images/poster1.jpg" alt="경복궁 생과방">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_sgb.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li><!-- program2 -->
+                    <li class="program3">
+                        <a href="../program_detail/program_detail_sj.html">
+                            <img src="../program_detail/images/seokjo_main_720.jpg" alt="밤의 석조전">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_sj.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program4">
+                        <a href="../program_detail/program_detail_child.html">
+                            <img src="../program_detail/images/child_main_720.jpg" alt="궁중직업실록">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_child.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program5">
+                        <a href="../program_detail/program_detail_morning.html">
+                            <img src="../program_detail/images/morning_main_720.jpg" alt="아침 궁을 깨우다">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_morning.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program6">
+                        <a href="../program_detail/program_detail_morning.html">
+                            <img src="./images/poster2.jpg" alt="고궁뮤지컬">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_morning.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program7">
+                        <a href="../program_detail/program_detail_morning.html">
+                            <img src="./images/poster3.jpg" alt="달빛기행">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_morning.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program8">
+                        <a href="../program_detail/program_detail_morning.html">
+                            <img src="./images/poster4.jpg" alt="묘현례">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_morning.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program9">
+                        <a href="../program_detail/program_detail_morning.html">
+                            <img src="./images/100_main_720.jpg" alt="고궁음악회">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_morning.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program1">
+                        <a href="../program_detail/program_detail_star.html">
+                            <img src="../program_detail/images/star_pst0319.jpg" alt="경복궁 별빛야행">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_star.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program2">
+                        <a href="../program_detail/program_detail_sgb.html">
+                            <img src="./images/poster1.jpg" alt="경복궁 생과방">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_sgb.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li><!-- program2 -->
+                    <li class="program3">
+                        <a href="../program_detail/program_detail_sj.html">
+                            <img src="../program_detail/images/seokjo_main_720.jpg" alt="밤의 석조전">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_sj.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="program4">
+                        <a href="../program_detail/program_detail_child.html">
+                            <img src="../program_detail/images/child_main_720.jpg" alt="궁중직업실록">
+                            <div class="book-see">
+                                <a href="../program_detail/program_detail_child.html" class="see">자세히보기</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul><!-- poster -->
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const posterWeb = document.querySelector('.poster-web');
+                    const listItems = document.querySelectorAll('.poster-web li');
+                
+                    listItems.forEach(item => {
+                        item.addEventListener('mouseenter', () => {
+                            posterWeb.style.animationPlayState = 'paused';
+                        });
+                        item.addEventListener('mouseleave', () => {
+                            posterWeb.style.animationPlayState = 'running';
+                        });
+                    });
+                });
+
+                function openPopup() {
+                  window.open("../booking/booking_popup.html", "Popup", "width=600,height=800");
+                }
+                </script>
+        </section><!-- popular -->
+
+
+
+        <div class="container">
+            <section class="keyword">
+                <h4 class="section-name">키워드별 추천</h4>
+                <div class="hashtag">
+                    <div class="monthly selected" data-target="program-box1">#5월_추천</div>
+                    <div class="parents" data-target="program-box2">#부모님과_함께</div>
+                    <div class="kids" data-target="program-box3">#아이와_함께</div>
+                    <div class="sold-out" data-target="program-box4">#매진임박</div>
+                    <div class="night" data-target="program-box5">#야간관람</div>
+                    <div class="special" data-target="program-box6">#이색체험</div>
+                </div>
+                
+                <div class="program-box program-box1">
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_sj.html'">
+                        <img src="./images/night_2.jpg" alt="밤의 석조전">
+                        <div class="desc">
+                            <p class="title">2024 덕수궁 밤의석조전</p>
+                            <p class="period">04.16 ~ 05.25</p>
+                            <p class="place">덕수궁 석조전</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_moon.html'">
+                        <img src="./images/may_2.jpg" alt="창덕궁 달빛기행">
+                        <div class="desc">
+                            <p class="title">창덕궁 달빛기행</p>
+                            <p class="period">4.11 ~ 6.2</p>
+                            <p class="place">창덕궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program03" onclick="window.location.href='../program_detail/program_detail_sgb.html'">
+                        <img src="./images/may_3.jpg" alt="경복궁 생과방">
+                        <div class="desc">
+                            <p class="title">경복궁 생과방</p>
+                            <p class="period">4.17 ~ 6.24</p>
+                            <p class="place">경복궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_star.html'">
+                        <img src="./images/may_4.jpg" alt="창경궁 물빛연화">
+                        <div class="desc">
+                            <p class="title">수라간 시식공감</p>
+                            <p class="period">5.22 ~ 5.20</p>
+                            <p class="place">경복궁 소주방 권역</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+                <div class="program-box program-box2">
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_morning.html'">
+                        <img src="./images/par_1.jpg" alt="아침궁">
+                        <div class="desc">
+                            <p class="title">아침 궁을 깨우다</p>
+                            <p class="period">4.29 ~ 5.3</p>
+                            <p class="place">창덕궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_sgb.html'">
+                        <img src="./images/may_3.jpg" alt="경복궁 생과방">
+                        <div class="desc">
+                            <p class="title">경복궁 생과방</p>
+                            <p class="period">4.17 ~ 6.24</p>
+                            <p class="place">경복궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program03" onclick="window.location.href='../program_detail/program_detail_moon.html'">
+                        <img src="./images/par_3.jpg" alt="창덕궁 달빛기행">
+                        <div class="desc">
+                            <p class="title">창경궁 물빛연화</p>
+                            <p class="period">04.27 ~ 05.05</p>
+                            <p class="place">창경궁 춘당지</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/par_4.jpg" alt="고궁음악회">
+                        <div class="desc">
+                            <p class="title">고궁음악회</p>
+                            <p class="period">5.4 ~ 5.5</p>
+                            <p class="place">경복궁 근정전</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+                <div class="program-box program-box3" >
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_1.jpg" alt="궁중직업실록">
+                        <div class="desc">
+                            <p class="title">궁중직업실록</p>
+                            <p class="period">5.1 ~ 5.5</p>
+                            <p class="place">창경궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_2.jpg" alt="전통 화장품">
+                        <div class="desc">
+                            <p class="title">전통화장품 만들기 체험</p>
+                            <p class="period">4.27 ~ 5.4</p>
+                            <p class="place">덕수궁 돈덕전</p>
+                        </div>
+                    </div>
+                    <div class="program03" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_3.jpg" alt="고궁뮤지컬">
+                        <div class="desc">
+                            <p class="title">고궁뮤지컬 - 세종,1446</p>
+                            <p class="period">4.28 ~ 4.30</p>
+                            <p class="place">경복궁 근정전</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_4.jpg" alt="과거시험">
+                        <div class="desc">
+                            <p class="title">어린이 과거시험</p>
+                            <p class="period">5.4~5.5</p>
+                            <p class="place">경복궁 근정전</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+                <div class="program-box program-box4">
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_3.jpg" alt="고궁뮤지컬">
+                        <div class="desc">
+                            <p class="title">고궁뮤지컬 - 세종,1446</p>
+                            <p class="period">4.28 ~ 4.30</p>
+                            <p class="place">경복궁 근정전</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_star.html'">
+                        <img src="./images/soldout_2.jpg" alt="경복궁 별빛야행">
+                        <div class="desc">
+                            <p class="title">2024 덕수궁 밤의석조전</p>
+                            <p class="period">4.3 ~ 5.4</p>
+                            <p class="place">경복궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program03" onclick="window.location.href='../program_detail/program_detail_sj.html'">
+                        <img src="./images/soldout_3.jpg" alt="종묘 묘현례">
+                        <div class="desc">
+                            <p class="title">종묘 묘현례 체험</p>
+                            <p class="period">4.27 ~ 5.3</p>
+                            <p class="place">종묘 영녕전</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/par_4.jpg" alt="고궁음악회">
+                        <div class="desc">
+                            <p class="title">고궁음악회</p>
+                            <p class="period">5.4 ~ 5.5</p>
+                            <p class="place">경복궁 근정전</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+                <div class="program-box program-box5">
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_star.html'">
+                        <img src="./images/soldout_2.jpg" alt="별빛야행">
+                        <div class="desc">
+                            <p class="title">2024 경복궁 별빛야행</p>
+                            <p class="period">4.03 ~ 5.4</p>
+                            <p class="place">경복궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_sj.html'">
+                        <img src="./images/night_2.jpg" alt="밤의 석조전">
+                        <div class="desc">
+                            <p class="title">2024 덕수궁 밤의석조전</p>
+                            <p class="period">04.16 ~ 05.25</p>
+                            <p class="place">덕수궁 석조전</p>
+                        </div>
+                    </div>
+                    <div class="program03">
+                        <img src="./images/may_2.jpg" alt="창덕궁 달빛기행">
+                        <div class="desc">
+                            <p class="title">2024 창덕궁 달빛기행</p>
+                            <p class="period">04.11 ~ 06.02</p>
+                            <p class="place">창덕궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_star.html'">
+                        <img src="./images/par_3.jpg" alt="창경궁 물빛연화">
+                        <div class="desc">
+                            <p class="title">2024 창경궁 물빛연화</p>
+                            <p class="period">04.27 ~ 05.05</p>
+                            <p class="place">창경궁 춘당지 일원</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+                <div class="program-box program-box6">
+                    <div class="program01" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_2.jpg" alt="전통화장품">
+                        <div class="desc">
+                            <p class="title">전통화장품 만들기 체험</p>
+                            <p class="period">4.27 ~ 5.4</p>
+                            <p class="place">덕수궁 돈덕전</p>
+                        </div>
+                    </div>
+                    <div class="program02" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/kids_1.jpg" alt="궁중직업실록">
+                        <div class="desc">
+                            <p class="title">궁중직업실록</p>
+                            <p class="period">5.1 ~ 5.5</p>
+                            <p class="place">창경궁 일원</p>
+                        </div>
+                    </div>
+                    <div class="program03" onclick="window.location.href='../program_detail/program_detail_moon.html'">
+                        <img src="./images/soldout_3.jpg" alt="창덕궁 달빛기행">
+                        <div class="desc">
+                            <p class="title">종묘 묘현례 체험</p>
+                            <p class="period">4.27 ~ 5.3</p>
+                            <p class="place">종묘 영녕전</p>
+                        </div>
+                    </div>
+                    <div class="program04" onclick="window.location.href='../program_detail/program_detail_child.html'">
+                        <img src="./images/may_4.jpg" alt="수라간 시식공감">
+                        <div class="desc">
+                            <p class="title">수라간 시식공감</p>
+                            <p class="period">5.22 ~ 5.20</p>
+                            <p class="place">경복궁 소주방 권역</p>
+                        </div>
+                    </div>
+                </div><!-- program -->
+
+            </section><!-- keyword -->
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                const hashtags = document.querySelectorAll(".hashtag div");
+                const programBoxes = document.querySelectorAll(".program-box");
+
+                hashtags.forEach(hashtag => {
+                    hashtag.addEventListener("click", function() {
+                        hashtags.forEach(tag => tag.classList.remove("selected"));
+                        this.classList.add("selected");
+
+                        programBoxes.forEach(box => {
+                            box.style.display = "none";
+                        });
+
+                        const targetBox = document.querySelector(`.${this.getAttribute("data-target")}`);
+                        if (targetBox) {
+                            targetBox.style.display = "flex";
+                        }
+                    });
+                });
+
+                // Ensure the first box is displayed by default
+                programBoxes.forEach((box, index) => {
+                    if (index !== 0) {
+                        box.style.display = "none";
+                    } else {
+                        box.style.display = "flex";
+                    }
+                });
+            });
+            </script>
+
+
+            <section class="place">
+                <h4 class="section-name">장소별 프로그램</h4>
+                <ul class="place-button">
+                    <li class="btn-big"><a href="../place_detail/place_detail_01.html">경복궁</a></li>
+                    <li class="btn-big"><a href="../place_detail/place_detail_02.html">창덕궁</a></li>
+                    <li class="btn-big"><a href="../place_detail/place_detail_03.html">덕수궁</a></li>
+                    <li class="btn-big"><a href="../place_detail/place_detail_04.html">창경궁</a></li>
+                    <li class="btn-big"><a href="../place_detail/place_detail_05.html">경희궁</a></li>
+                    <li class="btn-big"><a href="../place_detail/place_detail_06.html">종&nbsp;묘</a></li>
+                </ul>
+            </section><!-- place -->
+        </div><!-- container -->
+    </main>
+
+    <footer>
+        <div class="sns">
+            <a href="https://www.instagram.com/royalculturefestival_official/"><img src="../images/instagram.png" alt="instagram"></a>
+            <a href="https://www.youtube.com/channel/UC1_vDkQlNg0zjj-EQRXapww?view_as=subscriber"><img src="../images/youtube.png" alt="youtube"></a>
+            <a href="https://blog.naver.com/royalculture"><img src="../images/naver blog.png" alt="blog"></a>
+        </div>
+        <div class="footer-back">
+            <div class="footLogo">
+                <a href="../index.html"><img src="../images/footer_logo.png" alt=""></a>
+            </div>
+            <form action="">
+                <label for="sitemap" class="custom-select">
+                    <select name="sitemap" id="sitemap" onchange="navigateToSite()">
+                        <option value="sitemap" selected>사이트맵</option>
+                        <option value="https://www.kh.or.kr/kha">국가유산진흥원</option>
+                        <option value="https://www.kh.or.kr/kh">한국의집</option>
+                        <option value="https://www.khmall.or.kr/">KHMALL(문화상품)</option>
+                        <option value="https://www.kh.or.kr/bhse">매장유산국비발굴단</option>
+                        <option value="https://www.k-heritage.tv">국가유산채널</option>
+                        <option value="https://www.kh.or.kr/visit">국가유산 방문 캠페인</option>
+                        <option value="https://jrtf.or.kr/">조선왕릉문화제</option>
+                    </select>
+                </label>
+            </form>
+            <hr>
+            <div class="public">
+                <a href="https://www.kh.or.kr/combine/brd/1079/history/705">개인정보처리방침</a>
+                <a href="https://www.kh.or.kr/cms/content/view/706">이용약관</a>
+            </div>
+            <address>한국문화재재단 서울특별시 종로구 율곡로 53 (안국동 148)</address>
+            <div class="question">
+                <address class="tel">일반문의전화 1522-2295</address>
+                <address class="tel2">홍보 취재문의 02-3210-4683</address>
+            </div>
+            <div class="copyright">
+                <p>&copy;2020 Korea Cultural Heritage Foundation, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function navigateToSite() {
+            var select = document.getElementById('sitemap');
+            var url = select.options[select.selectedIndex].value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
+        </script>
+</body>
+</html>

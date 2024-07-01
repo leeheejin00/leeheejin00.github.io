@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../..css/reset.css">
+    <link rel="stylesheet" href="./css/booking_popup.css">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <style>
+        section.booking-info,
+        section.note,
+        button.book {
+            display: none;
+        }
+    </style>
+    <script src="./js/calendar.js"></script>
+	<script src="./js/jquery.js"></script>
+    <!-- <script>
+        $(function() {
+            $('#calendar-all').load('calendar.html');
+        })
+    </script> -->
+    <title>예매하기 팝업</title>
+</head>
+<body> <!-- 폼태그로 변경 ? -->
+    <div class="container">
+        <h1>예매하기</h1>
+
+        <section class="info-calendar">
+            <div class="mobile-title">
+                <p class="name">2024년 경복궁 별빛야행</p>
+                <p class="period">04.03.(수) ~ 05.04.(토) 경복궁 일원</p>
+                <p class="time">18:40 | 19:40 <span class="small">( 매주 수~일 2회차 진행 )</span></p>
+            </div><!-- mobile-title -->
+            <img src="../program_detail/images/star_pst0319.jpg" alt="별빛야행 포스터" class="poster">
+            
+            <div class="info">
+                <div class="title">
+                    <p class="name">2024년 경복궁 별빛야행</p>
+                    <p class="period">04.03.(수) ~ 05.04.(토) 경복궁 일원</p>
+                    <p class="time">18:40 | 19:40 <span class="small">( 매주 수~일 2회차 진행 )</span></p>
+                </div>
+                
+                <div id="calendar-all">
+                    <hr>
+                    <div class="button">
+                      <!-- <button onclick="prevMonth()">&lt;</button> -->
+                      <p id="calendar-month">2024년 4월</p>
+                      <!-- <button onclick="nextMonth()">&gt;</button> -->
+                    </div>
+                    <div id="calendar"></div>
+                    <hr>
+                </div><!-- calendar-all -->
+            </div> <!-- info -->
+        </section> <!-- info-calendar -->
+    
+        <section class="booking-info">
+            <div class="time-num">
+                <div class="time">
+                    <p class="title">회차선택 <span class="line">&nbsp;</span></p>
+                    <ul>
+                        <li>
+                            <div class="bg" onclick="toggleSelectTime(this)">18 : 40</div>
+                            <p class="small">잔여인원: 3명</p>
+                        </li>
+                        <li>
+                            <div class="bg disable" onclick="showDisabledTime()">19 : 40</div>
+                            <p class="small">잔여인원: 0명</p>
+                        </li>
+                    </ul>
+                </div> <!-- time -->
+    
+                <div class="num">
+                    <p class="title">예매인원</p>
+                    <ul>
+                        <li><span class="bg disable" onclick="showDisabledNum()">0</span></li>
+                        <li><span class="bg" onclick="toggleSelectNum(this)">1</span></li>
+                        <li><span class="bg" onclick="toggleSelectNum(this)">2</span></li>
+                        <li>
+                            <p class="small">*최대 2명까지 예매 가능합니다.</p>
+                        </li>
+                    </ul>
+                </div> <!-- num -->
+            </div> <!-- time-num -->
+    
+            <div class="price">
+                <p class="title">금액선택</p>
+                <ul>
+                    <li class="bg" onclick="toggleSelectPrice(this)">일반예매 60,000원</li>
+                    <li class="discount" onclick="showDiscount(); toggleSelectPrice(this);">장애인/국가유공자 30,000원</li>
+                </ul>
+                <p class="small">
+                    * 현장에서 증빙자료를 확인할 예정이오니 신분증(국가유공자증, 장애인 복지카드 등)을 반드시 지참하여 주시기 바랍니다. <br>
+                    * 현장에서 증빙서류(장애인 복지카드, 국가유공자증 등)를 지참하지 않거나 할인기준과 다른 경우 별빛야행의 참가가 취소 조치되며, 별도의 환불이 불가함을 알려드립니다.​ 
+                </p>
+            </div> <!-- price -->
+    
+            <div class="pay">
+                <p class="title">결제방법</p>
+                <ul>
+                    <li class="disable" onclick="showDisabledPay()">무통장입금</li>
+                    <li class="bg" onclick="toggleSelectPay(this)">계좌이체</li>
+                    <li class="bg" onclick="toggleSelectPay(this)">카드결제</li>
+                </ul>
+            </div> <!-- pay -->
+    
+            <div class="info">
+                <p class="title">예매자정보</p>
+                <div class="info-box">
+                    <!-- <p class="modify">수정하기</p> -->
+                    <p class="name"> <span class="bold">이&nbsp; &nbsp;름</span> <span class="content">홍길동</span> <span class="modify" onclick="editContent('name')">수정하기</span></p>
+                    <p class="phone"> <span class="bold">연락처</span> <span class="content">010 - 1234 - 5678</span> <span class="modify" onclick="editContent('phone')">수정하기</span></p>
+                    <p class="email"> <span class="bold">EMAIL</span> <span class="content">hong.gd123@naver.com</span> <span class="modify" onclick="editContent('email')">수정하기</span></p>
+                </div>
+
+                <script>
+                    function editContent(field) {
+                        var contentElement = document.querySelector('.' + field + ' .content');
+                        var currentContent = contentElement.textContent.trim();
+                        
+                        var newValue = prompt("새로운 정보를 입력하세요:", currentContent);
+                        
+                        if (newValue !== null && newValue !== '') {
+                            // Update the content
+                            contentElement.textContent = newValue;
+                            
+                            // You may want to save this new value to your server or update elsewhere in your application
+                        } else {
+                            // User clicked cancel or entered empty value
+                            alert("수정이 취소되었습니다.");
+                        }
+                    }
+                    </script>
+            </div> <!-- info -->
+            </div> <!-- info -->
+
+            <script>
+                // function toggleSelected(element) {
+                //     // element는 클릭된 div.bg 요소를 가리킵니다.
+                //     element.classList.toggle('selected');
+                // }
+
+                function toggleSelectTime(element) {
+                    // 클릭된 li 요소의 자식 span 요소들에서 select-num 클래스를 모두 제거합니다.
+                    var listItems = element.parentNode.parentNode.querySelectorAll('li span');
+                    listItems.forEach(function(item) {
+                        item.classList.remove('select-time');
+                    });
+
+                    // 클릭된 span 요소에 select-num 클래스를 추가합니다.
+                    element.classList.add('select-time');
+                }
+
+                function toggleSelectNum(element) {
+                    // 클릭된 li 요소의 자식 span 요소들에서 select-num 클래스를 모두 제거합니다.
+                    var listItems = element.parentNode.parentNode.querySelectorAll('li span');
+                    listItems.forEach(function(item) {
+                        item.classList.remove('select-num');
+                    });
+
+                    // 클릭된 span 요소에 select-num 클래스를 추가합니다.
+                    element.classList.add('select-num');
+                }
+
+                function toggleSelectPrice(element) {
+                    // 클릭된 li 요소들에서 select-price 클래스를 모두 제거합니다.
+                    var listItems = document.querySelectorAll('.price li');
+                    listItems.forEach(function(item) {
+                        item.classList.remove('select-price');
+                    });
+
+                    // 클릭된 li 요소에 select-price 클래스를 추가합니다.
+                    element.classList.add('select-price');
+                }
+
+                function toggleSelectPay(element) {
+                    // 클릭된 li 요소들에서 select-pay 클래스를 모두 제거합니다.
+                    var listItems = document.querySelectorAll('.pay li');
+                    listItems.forEach(function(item) {
+                        item.classList.remove('select-pay');
+                    });
+
+                    // 클릭된 li 요소에 select-pay 클래스를 추가합니다.
+                    element.classList.add('select-pay');
+                }
+
+                function showDisabledNum() {
+                    alert('관람 인원을 1명 이상 선택해 주세요.');
+                }
+
+                function showDiscount() {
+                    alert('현장에서 증빙 자료를 확인합니다. 하단 안내 사항을 확인해 주세요.');
+
+                    // // 예매금액 옵션에서 .selected 클래스 추가
+                    // var priceOptions = document.querySelectorAll('.price li');
+                    // priceOptions.forEach(function(option) {
+                    //     option.classList.remove('selected'); // 모든 옵션에서 .selected 클래스 제거
+                    // });
+
+                    // // 특정 옵션에 .selected 클래스 추가
+                    // var discountOption = document.querySelector('.price .discount');
+                    // discountOption.classList.add('selected');
+                }
+
+                function showDisabledTime() {
+                    alert('해당 회차는 매진되었습니다.');
+                }
+
+                function showDisabledPay() {
+                    alert('해당 수단으로 결제가 불가합니다.');
+                }
+                </script>
+        </section><!-- booking-info -->
+    </div><!-- container -->
+
+    <section class="note">
+        <div class="container">
+            <div class="content1">
+                <p class="title">판매일정</p>
+                <p class="content">
+                    - 예매기간 <br>
+                    1차) 2024. 3. 22.(금) 14시 ~ (행사일:2024.4.03.(수) ~ 4.21.(일)) <br>
+                    2차) 2024. 4. 12.(금) 14시 ~ (행사일:2024.4.24.(수) ~ ) <br>
+                    - 예매마감 : 관람일 당일 오전 10시 <br>
+                    - 취소마감 : 관람일 전일 17시 <br>
+                    &lt;경복궁 별빛야행&gt;은 행사 전일 17시까지 취소가 가능하며 기간 내 취소 수수료가 부과되지 않습니다.
+                </p>
+            </div>
+            <div class="content2">
+                <p class="title">행사정보</p>
+                <p class="content">
+                    - 행사기간 : 2024. 4. 3.(수) ~ 5. 4.(일) 매주 수~일요일(월, 화 휴무/ 4.26. 궁중문화축전 개막식 휴무) <br>
+                    - 행사시간 : 1부 18:40 ~ 20:30 / 2부 19:40 ~ 21:30 (110분) <br>
+                    - 행사장소 : 경복궁 소주방, 북측전각 일대 <br>
+                    - 행사내용 : 경복궁 소주방 궁중음식체험과 경복궁 북측권역 전각에 대한 해설을 들으며, 경복궁의 역사·문화·조경 등을 체험할 수 있는 야간 기행
+                </p>
+            </div>
+            <div class="content3">
+                <p class="title">주의사항</p>
+                <p class="content">
+                    - 경복궁 별빛야행 야간 해설탐방이 약 110분에 걸쳐 진행되며 내부 관람도 포함되어 있으니 편한 신발을 착용해주세요. 플래시와 삼각대는 사용이 불가하며, 음식물 반입 금지입니다.<br>
+                    - &lt;경복궁 별빛야행&gt;전화예약 및 할인 혜택을 받은 참가자는 본인이 직접 참석 하셔야 합니다.<br>
+                    - &lt;경복궁 별빛야행&gt;은 지인 간의 양도가 불가능 합니다.<br>
+                    * 단, 직계가족 및 형제/자매에 한해 참가자 신분증, 증빙자료(등본, 가족관계증명서 등) 확인 후 입장이 가능합니다.<br>
+                    - 8세 취학아동 이상 관람이 가능하며, 취학아동 및 청소년은 반드시 보호자 동반하여 입장이 가능합니다.<br>
+                    - 채식메뉴를 원하시는 분은 참여일 3일전까지 티켓링크 콜센터(1588-7890)를 통해 사전 신청 부탁드립니다.<br>
+                    * 무통장 입금 결제는 불가합니다.​ 
+                </p>
+            </div>
+        </div><!-- container -->
+    </section> <!-- note -->
+
+    <div class="container">
+        <button class="book" onclick="bookingFinish()">예매하기</button>
+
+        <script>
+            function bookingFinish() {
+                var confirmed = confirm('예매를 완료하시겠습니까?');
+                if (confirmed) {
+                    alert('예매가 완료되었습니다. 예매확인 페이지에서 확인해 주세요.');
+                    window.close();
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
