@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/login.js"></script>
+    <script src="./js/loginTab.js"></script>
+    <title>index</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchIcon = document.getElementById('searchIcon');
+            const searchInput = document.getElementById('searchInput');
+
+            searchIcon.addEventListener('click', function() {
+                const query = searchInput.value;
+                if (query === '경복궁') {
+                    window.location.href = './index_search/index_search.html';
+                } else {
+                    alert('Please enter "경복궁" to search.');
+                }
+            });
+        });
+    </script>
+    <script>
+        window.onload = function() {
+            const toggleBtn = document.querySelector('.menu-toggle-btn');
+            const sideMenu = document.getElementById('side-menu');
+
+            toggleBtn.addEventListener('click', function() {
+                 if (sideMenu.style.right === '0px') {
+                    sideMenu.style.right = '-250px'; 
+                    toggleBtn.classList.remove('open'); 
+                } else {
+                    sideMenu.style.right = '0'; 
+                    toggleBtn.classList.add('open'); 
+                }
+            });
+        };
+    </script>
+    <script>
+        document.getElementById('languageIcon').addEventListener('click', function(event) {
+        event.preventDefault();
+        var languageSelect = document.getElementById('languageSelect');
+        if (languageSelect.style.display === 'none' || languageSelect.style.display === '') {
+            languageSelect.style.display = 'block';
+        } else {
+            languageSelect.style.display = 'none';
+        }
+    });
+    </script>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var searchIcon = document.getElementById("searchIcon");
+        var searchInput = document.getElementById("searchInput");
+
+        searchIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (searchInput.style.display === "none" || searchInput.style.display === "") {
+                searchInput.style.display = "block";
+                searchInput.focus();
+            } else {
+                searchInput.style.display = "none";
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            if (!searchInput.contains(event.target) && !searchIcon.contains(event.target)) {
+                searchInput.style.display = "none";
+            }
+        });
+    });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.gnb > li > a');
+        
+        menuItems.forEach(item => {
+            item.addEventListener('mouseover', function (e) {
+                e.preventDefault();
+                const submenu = this.nextElementSibling;
+
+                document.querySelectorAll('.submenu').forEach(sub => {
+                    if (sub !== submenu) {
+                        sub.classList.remove('open');
+                        sub.style.maxHeight = null;
+                    }
+                });
+
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.toggle('open');
+                    if (submenu.classList.contains('open')) {
+                        submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    } else {
+                        submenu.style.maxHeight = null;
+                    }
+                }
+            });
+
+            item.parentElement.addEventListener('mouseleave', function () {
+                const submenu = item.nextElementSibling;
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.remove('open');
+                    submenu.style.maxHeight = null;
+                }
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="modal-overlay"></div>   
+
+        <div class="form">
+    
+            <ul class="tab-group">
+              <li class="tab active"><a href="#signup">회원가입</a></li>
+              <li class="tab"><a href="#login">로그인</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div id="signup">   
+                <h1>무료로 회원가입 하세요!</h1>
+                
+                <form action="/" method="post">
+                
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>
+                      성<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label>
+                      이름<span class="req">*</span>
+                    </label>
+                    <input type="text"required autocomplete="off"/>
+                  </div>
+                </div>
+      
+                <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email"required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호 설정<span class="req">*</span>
+                  </label>
+                  <input type="password"required autocomplete="off"/>
+                </div>
+                
+                <button type="submit" class="button button-block">Get Started</button>
+                
+                </form>
+      
+              </div>
+              
+              <div id="login">   
+                <h1>환영합니다!</h1>
+                
+                <form id="login-form" action="login.php" method="post">
+                
+                  <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email" id="login-email" name="login-email" required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호<span class="req">*</span>
+                  </label>
+                  <input type="password" id="login-password" name="login-password" required autocomplete="off"/>
+                </div>
+                
+                <p class="forgot"><a href="#">혹시 비밀번호를 잊으셨나요?</a></p>
+                
+                <button class="button button-block">Log In</button>
+                
+                </form>
+      
+              </div>
+              
+            </div><!-- tab-content -->
+            
+      </div> <!-- /form -->
+        <video autoplay muted loop>
+            <source src="./mainvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <div class="logo-icon">
+                <a href="./index.html"><img src="./images/header-white-logo.png" alt="header_logo"></a>
+                <div class="search-menu">
+                    <div style="display: flex; align-items: center;">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ko">Korean</option>
+                            <option value="jp">Japanese</option>
+                        </select>
+                        <a href="#" id="intranet-icon"><img src="./images/language-white.png" alt=""></a>
+                    </div>
+                    <a href="#" id="login-toggle"><img src="./images/login-white.png" alt=""></a>
+                    <a href=""><img id="searchIcon" src="./images/main-search-white.png" alt="search"></a>
+                    <div class="menu-toggle-btn">
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                    </div>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+                </div> <!-- search-menu -->
+            </div> <!-- logo-icon -->
+            <script>
+                document.getElementById('intranet-icon').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var selectMenu = document.getElementById('language-select');
+                    if (selectMenu.style.display === 'none' || selectMenu.style.display === '') {
+                        selectMenu.style.display = 'block';
+                    } else {
+                        selectMenu.style.display = 'none';
+                    }
+                });
+                </script>
+
+            <div id="side-menu" class="side-menu">
+                <div class="language-login">
+                    <div class="login">
+                        <a href="#" id="mobile-login-toggle">로그인</a>
+                        <a href="#"><img src="./images/korean-hat.png" alt="login" class="loginimg"></a>
+                    </div>
+            </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', (event) => {
+                        const languageSelect = document.getElementById('language-select');
+                        const languageIcon = document.getElementById('languageIcon');
+
+                        const toggleLanguageSelect = () => {
+                            languageSelect.size = languageSelect.size === 1 ? 4 : 1;
+                        };
+
+                        languageIcon.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            toggleLanguageSelect();
+                        });
+
+                        languageSelect.addEventListener('blur', () => {
+                            languageSelect.size = 1;
+                        });
+                    });
+                </script>
+
+                <nav class="side-nav">
+                    <ul class="gnb">
+                        <li>
+                            <a href="./index.html"><img src="./images/side-menu-icon.png" alt="">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="./main-info/main-info.html">소개·연혁</a></li>
+                                <li><a href="./fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li class="palace-menu">
+                            <a href="#"><img src="./images/side-menu-icon.png" alt="">서울 속 고궁</a>
+                            <ul class="submenu">
+                                <div class="palace1">
+                                    <li><a href="./place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="./place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="./place_detail/place_detail_03.html">덕수궁</a></li>
+                                </div>
+                                <div class="palace2">
+                                    <li><a href="./place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="./place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="./place_detail/place_detail_06.html">종묘</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="./images/side-menu-icon.png" alt="">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="./gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="./gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="./images/side-menu-icon.png" alt="">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="./notice/notice.html">공지사항</a></li>
+                                <li><a href="./press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="./index.html"><img src="./images/side-menu-icon.png" alt="">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="./booking/booking.html">예매하기</a></li>
+                                <li><a href="./booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu_box">
+                <nav class="mainmenu">
+                    <ul class="gnb">
+                        <li>
+                            <a href="#">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="./main-info/main-info.html">소개.연혁</a></li>
+                                <li><a href="./fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">서울 속 고궁</a>
+                                <ul class="submenu">
+                                    <li><a href="./place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="./place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="./place_detail/place_detail_03.html">덕수궁</a></li>
+                                    <li><a href="./place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="./place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="./place_detail/place_detail_06.html">종묘</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="./gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="./gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="./notice/notice.html">공지사항</a></li>
+                                <li><a href="./press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="./booking/booking.html">예매하기</a></li>
+                                <li><a href="./booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <form id="searchForm" action="./index_search/index_search.html" method="get" onsubmit="return validateSearch()">
+                    <div class="search-box">
+                        <label for="find"></label>
+                        <input type="search" id="find" name="find" value="경복궁" />
+                        <div class="search" onclick="submitForm()">
+                            <img src="./images/main-search-white.png" alt="Search">
+                        </div>
+                    </div>
+                </form>
+                <script>
+                    function submitForm() {
+                        document.getElementById("searchForm").submit();
+                    }
+                    function validateSearch() {
+                        var find = document.getElementById("find").value;
+                        if (find.trim() === "") {
+                            alert("검색어를 입력하세요.");
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="intro">
+            <div class="container">
+                <h2>고궁체험하기</h2>
+                <div class="intro-imgbox">
+                    <a href="./program_detail/program_detail_star.html">
+                        <img src="./images/intro_1.jpg" alt="intro1">
+                        <div class="overlay">
+                            <p class="palace2024">2024년 경복궁</p>
+                            <h3>별빛야행</h3>
+                            <div class="date-box">
+                                <p class="date">04.03~05.04</p>
+                                <p class="location">경복궁 일원</p>
+                            </div>
+                        </div>
+                        <div class="overlay2">
+                            <p class="palace2024">2024 경복궁 별빛야행</p>
+                            <div class="date-box">
+                                <p class="date">04.03~05.04</p>
+                                <p class="location">경복궁 일원</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="./program_detail/program_detail_sj.html">
+                        <img src="./images/intro_2.png" alt="intro1">
+                        <div class="overlay">
+                            <p class="palace2024">2024년 덕수궁</p>
+                            <h3>밤의 석조전</h3>
+                            <div class="date-box">
+                                <p class="date">04.16~05.25</p>
+                                <p class="location">덕수궁 석조전</p>
+                            </div>
+                        </div>
+                        <div class="overlay2">
+                            <p class="palace2024">2024 덕수궁 밤의 석조전</p>
+                            <div class="date-box">
+                                <p class="date">04.16~05.25</p>
+                                <p class="location">덕수궁 석조전</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="./program_detail/program_detail_moon.html">
+                        <img src="./images/intro_3.png" alt="intro1">
+                        <div class="overlay">
+                            <p class="palace2024">2024년 창덕궁</p>
+                            <h3>달빛기행</h3>
+                            <div class="date-box">
+                                <p class="date">04.11~06.02</p>
+                                <p class="location">창덕궁 일원</p>
+                            </div>
+                        </div>
+                        <div class="overlay2">
+                            <p class="palace2024">2024 창덕궁 달빛기행</p>
+                            <div class="date-box">
+                                <p class="date">04.11~06.02</p>
+                                <p class="location">창덕궁 일원</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="./program_detail/program_detail_sgb.html">
+                        <img src="./images/intro_4.png" alt="intro1">
+                        <div class="overlay">
+                            <p class="palace2024">2024년 경복궁</p>
+                            <h3>생과방</h3>
+                            <div class="date-box">
+                                <p class="date">04.17~06.24</p>
+                                <p class="location">경복궁 생과방</p>
+                            </div>
+                        </div>
+                        <div class="overlay2">
+                            <p class="palace2024">2024 경복궁 생과방</p>
+                            <div class="date-box">
+                                <p class="date">04.17~06.24</p>
+                                <p class="location">경복궁 생과방</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="palace">
+            <div class="palace-box">
+                <div class="mo-palace-box1">
+                  <a href="./place_detail/place_detail_01.html"><img src="./images/palace.png" alt="palace" class="mo-palace"></a>
+                </div>
+                <div class="mo-palace-box2">
+                  <a href="./place_detail/place_detail_02.html"><img src="./images/main_02.jpg" alt="palace" class="mo-palace"></a>
+                </div>
+                <div class="mo-palace-box3">
+                  <a href="./place_detail/place_detail_03.html"><img src="./images/main_03.jpg" alt="palace" class="mo-palace"></a>
+                </div>
+                <div class="mo-palace-box4">
+                  <a href="./place_detail/place_detail_04.html"><img src="./images/main_04.jpg" alt="palace" class="mo-palace"></a>
+                </div>
+                <div class="mo-palace-box5">
+                  <a href="./place_detail/place_detail_05.html"><img src="./images/main_05.jpg" alt="palace" class="mo-palace"></a>
+                </div>
+                <div class="mo-palace-box6">
+                  <a href="./place_detail/place_detail_06.html"><img src="./images/main_06.jpg" alt="palace" class="mo-palace"></a>
+                </div>
+            </div>
+            <div class="container">
+              <div class="palace-txt1">
+                <div class="txt">
+                  <h2>서울 5대 고궁과 종묘</h2>
+                  <p>
+                    <span class="txt1">우두커니 자리를 지키며<br></span>
+                    <span class="txt2">수백 년의 역사와 아름다움을 간직한<br></span>
+                    <span class="txt3">우리 고궁을 직접 느껴보세요</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="palace-txt2">
+              <div class="container">
+                <div class="palace-slide1">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">경복궁</h2>
+                  </div>
+                  <p class="text1">경복궁은 조선 건국 후 가장 먼저 지어진 조선왕조의 법궁으로, 조선왕조 정궁의 면모를 확인할 수 있는 중요한 유적입니다.</p>
+                  <p class="text2">'경복'의 이름에 '새 왕조가 큰 복을 누려 변명할 것'이라는 의미가 담겨있으며, 이곳에서 세종 대에 훈민정음이 창제되어 반포되기도 하였답니다.</p>
+                </div>
+                <div class="palace-slide2">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">창덕궁</h2>
+                  </div>
+                  <p class="text1">1405년 법궁인 경복궁의 이궁으로 창건된 창덕궁은 주변 지형과 조화를 이루도록 자연스럽게 건축된 가장 한국적인 궁입니다.</p>
+                  <p class="text2">경복궁을 대신해 실질적인 법궁의 역할을 하기도 하였고, 한국의 유일한 궁궐후원이 조성된 휴식과 생활의 공간이 조화롭게 이루어진 궁이랍니다.</p>
+                </div>
+                <div class="palace-slide3">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">덕수궁</h2>
+                  </div>
+                  <p class="text1">조선 제9대 성종의 형인 월산대군의 사저로 쓰이던 덕수궁은, 1897년 고종이 대한제국을 선포하며 대한제국의 황궁으로 사용한 궁입니다.</p>
+                  <p class="text2">황궁에 맞게 규모를 확장하고 격식을 높였으며, 궁궐 내 서양식 건물을 짓기 시작하여 전통 건축물과 서양식 건축물이 조화를 이루고 있답니다.</p>
+                </div>
+                <div class="palace-slide4">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">창경궁</h2>
+                  </div>
+                  <p class="text1">창경궁은 성종이 세 명의 대비를 위해 옛 수강궁에 창건한 별궁으로, 주로 왕실 가족들이 생활 공간으로 지냈던 곳입니다.</p>
+                  <p class="text2">순종 시절 궁 내에 동물원과 식물원을 조성하고, 일제에 의해 궁의 이름마저 창경원(昌慶苑)으로 격하되는 등 아픈 역사가 남아있는 곳이기도 합니다.</p>
+                </div>
+                <div class="palace-slide5">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">경희궁</h2>
+                  </div>
+                  <p class="text1">경희궁은 왕이 본궁을 떠나 피우하는 이궁으로 지어졌지만, 동궐인 창덕궁에 대하여 서궐이라 불리고 중요시되었던 곳입니다.</p>
+                  <p class="text2">일제강점기에 건물 대부분이 철거되고, 일본인들의 학교로 사용되어 완전히 궁궐의 자취를 잃었지만, 이후 궁터 일부를 복원하고 역사박물관을 조성하였습니다.</p>
+                </div>
+                <div class="palace-slide6">
+                  <div class="palace_title">
+                    <h2><img src="./images/palace_icon.png" alt="">종묘</h2>
+                  </div>
+                  <p class="text1">종묘(宗廟)는 조선과 대한제국의 역대 왕과 왕비, 황제와 황후의 신주를 모시고 제사를 지내는 국가 사당입니다.</p>
+                  <p class="text2">조상에 대한 예절을 매우 중요하게 생각했던 조선의 정신을 보여주는 종묘제례는 매년 5월 첫째주 일요일에 어가행렬과 함께 진행되고 있습니다.</p>
+                </div>
+              </div>
+            </div>
+            <script>
+                const images = document.querySelectorAll('.mo-palace-box1, .mo-palace-box2, .mo-palace-box3, .mo-palace-box4, .mo-palace-box5, .mo-palace-box6');
+                const texts = document.querySelectorAll('.palace-slide1, .palace-slide2, .palace-slide3, .palace-slide4, .palace-slide5, .palace-slide6');
+                
+                let currentSlide = 0;
+                const slideInterval1 = 2000;
+                let interval;
+            
+                function showSlide1(index) {
+                    images.forEach(img => img.style.display = 'none');
+                    texts.forEach(text => text.style.display = 'none');
+
+                    images[index].style.display = 'block';
+                    texts[index].style.display = 'block';
+                }
+            
+                function nextSlide1() {
+                    currentSlide = (currentSlide + 1) % images.length;
+                    showSlide1(currentSlide);
+                }
+            
+                function prevSlide2() {
+                    currentSlide = (currentSlide - 1 + images.length) % images.length;
+                    showSlide1(currentSlide);
+                }
+            
+                function startSlideShow() {
+                    interval = setInterval(nextSlide1, slideInterval1);
+                }
+            
+                function stopSlideShow() {
+                    clearInterval(interval);
+                }
+
+                showSlide1(currentSlide);
+                startSlideShow();
+
+                images.forEach(img => {
+                    img.addEventListener('mouseover', stopSlideShow);
+                    img.addEventListener('mouseout', startSlideShow);
+                });
+            
+                texts.forEach(text => {
+                    text.addEventListener('mouseover', stopSlideShow);
+                    text.addEventListener('mouseout', startSlideShow);
+                });
+
+                document.getElementById('prevSlide2').addEventListener('click', () => {
+                    stopSlideShow();
+                    prevSlide2();
+                    startSlideShow();
+                });
+            
+                document.getElementById('nextSlide1').addEventListener('click', () => {
+                    stopSlideShow();
+                    nextSlide1();
+                    startSlideShow();
+                });
+            </script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                const options = {
+                    threshold: 0.5
+                };
+
+                function initObserver() {
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, options);
+
+                    
+                    const palacTxt1 = document.querySelector('.palace-txt1');
+                    const palaceTxt2 = document.querySelector('.palace-txt2');
+              
+                    palacTxt1.classList.add('slide-in-left');
+                    palaceTxt2.classList.add('slide-in-left');
+
+                    observer.observe(palacTxt1);
+                    observer.observe(palaceTxt2);
+                }
+
+                function checkScreenSize() {
+                    if (window.innerWidth >= 768) {
+                        initObserver();
+                    }
+                }
+
+                checkScreenSize();
+
+                window.addEventListener('resize', checkScreenSize);
+            });
+            </script>
+          </section>
+
+          <section id="banner">
+            <div class="baner-slide-mo">
+                <div class="baner-slide-mo1">
+                    <a href="https://www.youtube.com/watch?feature=shared&v=_DVDyzo5wRE"><img src="./images/banner2.png" alt=""></a>
+                </div>
+                <div class="baner-slide-mo2">
+                    <a href="https://www.youtube.com/watch?v=AI9L1e4BFwY&t=4s"><img src="./images/banner1.jpg" alt=""></a>
+                </div>
+                <div class="baner-slide-mo3">
+                    <a href="https://www.youtube.com/watch?v=AI9L1e4BFwY&t=4s"><img src="./images/banner3.png" alt=""></a>
+                </div>
+            </div>
+            <div class="baner-allbox">
+                <div class="banner-box">
+                    <div class="baner-slide1">
+                        <a href="https://www.youtube.com/watch?v=AI9L1e4BFwY&t=4s"><img src="./images/banner1.jpg" alt=""></a>
+                    </div>
+                    <div class="baner-slide2">
+                            <a href="https://www.youtube.com/watch?feature=shared&v=_DVDyzo5wRE"><img src="./images/banner2.png" alt=""></a>
+                        </div>
+                    <div class="baner-slide3">
+                        <a href="https://www.youtube.com/watch?v=AI9L1e4BFwY&t=4s"><img src="./images/banner3.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <script src="js/jquery.js"></script>
+            <script>
+                function auto() {
+                    $('.banner-box').animate({left: '-80%'}, 500, function() {
+                        $('.banner-box').append($('.banner-box > div').first()).css({left: '0%'});
+                    });
+                }
+                let timer2 = setInterval(auto, 3000);
+            </script>
+
+            <script>
+                function auto2() {
+                    $('.baner-slide-mo').animate({left: '-80%'}, 500, function() {
+                        $('.baner-slide-mo').append($('.baner-slide-mo > div').first()).css({left: '0%'});
+                    });
+                }
+                let timer4 = setInterval(auto2, 3000);
+            </script>
+
+            
+        </section>
+        
+
+        <section id="notice">
+            <div class="container">
+                <h2>고궁소식</h2>
+            </div>
+            <div class="notice-slide-flex">
+                <div class="slide1">
+                    <a href="#" id="left"><img src="./images/left_arrow.png" alt="left arrow"></a>
+                </div>
+                <div class="notice-flex-box">
+                        <div class="notice_box1 active">
+                            <a href="./press_release_pg/press_release_pg.html">
+                                <div class="notice-txt">
+                                    <div class="border-box">
+                                        <span>보도자료</span>
+                                        <h3 class="no-title">2024년 궁중문화축전 특별관람권 궁패스 상세 수령처 안내</h3>
+                                    </div>
+                                    <p class="main-info">2024<궁중문화축전 특별관람권 궁패스>의 상..</p>
+                                    <p class="main-info2">
+                                    *사전 예매 티켓 매진 시 현장 판매를 진행하지 않을 수 있습니다.<br>
+                                    가. 경복궁, 창덕궁, 창경궁 궁중문화축전 종합안내소<br>
+                                    ㅇ 위치: 경복궁 흥례문 광장 ... 
+                                    </p>
+                                    <div class="date-more">
+                                        <span class="date">2024.04.22</span>
+                                        <div class="more-btn">
+                                            <div class="square">
+                                                <p>더보기</p>
+                                                <img src="./images/right-arrow-white.png" alt="흰색 화살표">
+                                            </div><!-- square -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div> <!-- notice-box -->
+                        <div class="notice_box2">
+                            <a href="./press_release_pg/press_release_pg.html">
+                                <div class="notice-txt">
+                                    <div class="border-box">
+                                        <span>보도자료</span>
+                                        <h3 class="no-title">박해일의 목소리로 듣는 창덕궁과 전통공예의 아름다움</h3>
+                                    </div>
+                                    <p class="main-info">박해일 참여 전시 오디오 가이드, 궁능TV유튜브 공개..</p>
+                                    <p class="main-info2">문화재청 궁능유적본부(본부장 직무대리 송인헌)와 한국문화재재단(이사장 최영창)이 주최하는 창덕궁 공예전시 <공생: 시공간의 중첩>의 오디오 가이드에 박해일 배우가 참여한다...
+                                    </p>
+                                    <div class="date-more">
+                                        <span class="date">2024.04.24</span>
+                                        <div class="more-btn">
+                                            <div class="square">
+                                                <p>더보기</p>
+                                                <img src="./images/right-arrow-white.png" alt="흰색 화살표">
+                                            </div><!-- square -->
+                                        </div>
+                                    </div>
+                                </div> <!-- notice-txt -->
+                            </a>
+                        </div> <!-- notice_box2 -->
+                        <div class="notice_box3">
+                            <a href="./press_release_pg2/press_release_pg2.html">
+                                <div class="notice-txt">
+                                    <div class="border-box">
+                                        <span>보도자료</span>
+                                        <h3 class="no-title">궁중문화축전, 경복궁 ‘케이헤리티지 마켓' 열어</h3>
+                                    </div>
+                                    <p class="main-info">국가무형유산의 작품부터 전통 문화상품 전통 먹거리까지..</p>
+                                    <p class="main-info2">
+                                        문화재청 궁능유적본부(본부장 직무대리 송인헌)와 한국문화재재단(이사장 최영창)이 ‘궁중문화축전’ 프로그램으로 올해 처음 선보인 ‘케이헤리티지(K-Heritage)마켓’ 이 관람객들의 큰 호응을 얻고 있다..
+                                    </p>
+                                    <div class="date-more">
+                                        <span class="date">2024.05.04</span>
+                                        <div class="more-btn">
+                                            <div class="square">
+                                                <p>더보기</p>
+                                                <img src="./images/right-arrow-white.png" alt="흰색 화살표">
+                                            </div><!-- square -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>  
+                        </div> <!-- notice-box3 -->
+                </div><!-- notice-flex-box -->
+                <div class="slide2">
+                    <a href="#" id="right"><img src="./images/right_arrow.png" alt="right arrow"></a>
+                </div>
+                </div>
+            </div>
+            <script src="js/jquery.js"></script>
+            <script>
+               function moveRight() {
+                if ($(window).width() <= 768) {
+                    $('.notice-flex-box').stop().animate({ left: '-100%' }, 500, function() {
+                        $(this).css({ left: '0' }).append($('.notice_box1').removeClass('active').next().addClass('active'));
+                        resetActiveClass();
+                    });
+                }
+            }
+
+            function moveLeft() {
+                if ($(window).width() <= 768) {
+                    $('.notice-flex-box').stop().animate({ left: '100%' }, 500, function() {
+                        $(this).css({ left: '0' }).prepend($('.notice_box3').removeClass('active').prev().addClass('active'));
+                        resetActiveClass();
+                    });
+                }
+            }
+
+            function resetActiveClass() {
+                $('.notice_box1, .notice_box2, .notice_box3').removeClass('active');
+                $('.notice_box1').next().addClass('active');
+            }
+
+            function auto() {
+                moveRight();
+            }
+
+            let timer = setInterval(auto, 3000);
+
+            $('.notice-slide-flex').on('mouseover', function() {
+                clearInterval(timer);
+            });
+
+            $('.notice-slide-flex').on('mouseleave', function() {
+                timer = setInterval(auto, 3000);
+            });
+
+            $(document).ready(function() {
+                resetActiveClass();
+            });
+
+            $('#left').click(function(e) {
+                e.preventDefault();
+                moveLeft();
+            });
+
+            $('#right').click(function(e) {
+                e.preventDefault();
+                moveRight();
+            });
+            </script>
+        </section>
+        
+        <section id="history">
+            <div class="container">
+                <div class="history-box">
+                    <h2>고궁발자취</h2>
+                    <div class="menu-box">
+                        <ul class="palace_gnb">
+                            <li>
+                                <a href="">경복궁</a>
+                            </li>
+                            <li>
+                                <a href="">창덕궁</a>
+                            </li>
+                            <li>
+                                <a href="">덕수궁</a>
+                            </li>
+                            <li>
+                                <a href="">창경궁</a>
+                            </li>
+                            <li>
+                                <a href="">경희궁</a>
+                            </li>
+                            <li>
+                                <a href="">종묘</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="./place_detail/place_detail_01.html">
+                    <div class="palace-img1">
+                        <img src="./images/palace-img1.png" alt="palace-img1">
+                        <img src="./images/palace-img2.png" alt="palace-img2">
+                        <img src="./images/palace-img3.png" alt="palace-img3">
+                        <img src="./images/palace-img4.png" alt="palace-img4">
+                    </div>
+                </a>
+                <a href="./place_detail/place_detail_02.html">
+                    <div class="palace-img2">
+                        <img src="./images/chang1.jpg">
+                        <img src="./images/chang2.jpg" alt="palace-img2">
+                        <img src="./images/chang3.jpg" alt="palace-img3">
+                        <img src="./images/chang4.jpg" alt="palace-img4">
+                    </div>
+                </a>
+                <a href="./place_detail/place_detail_03.html">
+                    <div class="palace-img3">
+                        <img src="./images/duc1.jpg">
+                        <img src="./images/duc2.jpg" alt="palace-img2">
+                        <img src="./images/duc3.jpg" alt="palace-img3">
+                        <img src="./images/duc4.jpg" alt="palace-img4">
+                    </div>
+                </a>
+                <a href="./place_detail/place_detail_04.html">
+                    <div class="palace-img4">
+                        <img src="./images/changkyung1.jpg">
+                        <img src="./images/changkyung2.jpg" alt="palace-img2">
+                        <img src="./images/changkyung3.jpg" alt="palace-img3">
+                        <img src="./images/changkyung4.jpg" alt="palace-img4">
+                    </div>
+                </a>
+                <a href="./place_detail/place_detail_05.html">
+                    <div class="palace-img5">
+                        <img src="./images/kyung1.JPG">
+                        <img src="./images/kyung2.jpg" alt="palace-img2">
+                        <img src="./images/kyung3.jpg" alt="palace-img3">
+                        <img src="./images/kyung4.jpg" alt="palace-img4">
+                    </div>
+                </a>
+                <a href="./place_detail/place_detail_06.html">
+                    <div class="palace-img6">
+                        <img src="./images/jongmo1.jpg">
+                        <img src="./images/jongmo2.jpg" alt="palace-img2">
+                        <img src="./images/jongmo3.jpg" alt="palace-img3">
+                        <img src="./images/jongmo4.jpg" alt="palace-img4">
+                    </div>
+                </a>
+                <div class="palace-img-pc">
+                    <a href="./place_detail/place_detail_06.html"><h2 class="palace-history">종 묘</h2></a>
+                    <a href="../place_detail/place_detail_01.html" class="img-container1">
+                        <img src="./images/palace-img1.png" alt="palace-img1" class="img1">
+                        <div class="overlay-text">경 복 궁</div>
+                    </a>
+                    <a href="./place_detail/place_detail_05.html" class="img-container2">
+                        <img src="./images/palace-img2.png" alt="palace-img2" class="img2">
+                        <div class="overlay-text">경 희 궁</div>
+                    </a>
+                    <a href="./place_detail/place_detail_03.html"><h2 class="palace">덕 수 궁</h2></a>
+                    <a href="../place_detail/place_detail_02.html" class="img-container3">
+                        <img src="./images/palace-img3.png" alt="palace-img3" class="img3">
+                        <div class="overlay-text">창 덕 궁</div>
+                    </a>
+                    <a href="./place_detail/place_detail_04.html" class="img-container4">
+                        <img src="./images/palace-img4.png" alt="palace-img4" class="img4">
+                        <div class="overlay-text">창 경 궁</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const palaceLinks = document.querySelectorAll('.palace_gnb li a');
+            const palaceSections = [
+                '.palace-img1',
+                '.palace-img2',
+                '.palace-img3',
+                '.palace-img4',
+                '.palace-img5',
+                '.palace-img6'
+            ];
+
+            function showPalace(index) {
+                palaceSections.forEach((selector, i) => {
+                    const section = document.querySelector(selector);
+                    if (i === index) {
+                        section.style.display = 'grid';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+
+            palaceLinks.forEach((link, index) => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPalace(index);
+                });
+            });
+
+            showPalace(0);
+        });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const options = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            const img1 = document.querySelector('.img1');
+            const img2 = document.querySelector('.img2');
+            const img3 = document.querySelector('.img3');
+            const img4 = document.querySelector('.img4');
+
+            img1.classList.add('slide-in-left');
+            img2.classList.add('slide-in-right');
+            img3.classList.add('slide-in-top');
+            img4.classList.add('slide-in-left');
+
+            observer.observe(img1);
+            observer.observe(img2);
+            observer.observe(img3);
+            observer.observe(img4);
+        });
+        </script>
+    </main>
+
+    <footer>
+        <div class="sns">
+            <a href="https://www.instagram.com/royalculturefestival_official/"><img src="./images/instagram.png" alt="instagram"></a>
+            <a href="https://www.youtube.com/channel/UC1_vDkQlNg0zjj-EQRXapww?view_as=subscriber"><img src="./images/youtube.png" alt="youtube"></a>
+            <a href="https://blog.naver.com/royalculture"><img src="./images/naver blog.png" alt="blog"></a>
+        </div>
+        <div class="footer-back">
+            <div class="footLogo">
+                <a href="../index.html"><img src="../images/footer_logo.png" alt=""></a>
+            </div>
+            <form action="">
+                <label for="sitemap" class="custom-select">
+                    <select name="sitemap" id="sitemap" onchange="navigateToSite()">
+                        <option value="sitemap" selected>사이트맵</option>
+                        <option value="https://www.kh.or.kr/kha">국가유산진흥원</option>
+                        <option value="https://www.kh.or.kr/kh">한국의집</option>
+                        <option value="https://www.khmall.or.kr/">KHMALL(문화상품)</option>
+                        <option value="https://www.kh.or.kr/bhse">매장유산국비발굴단</option>
+                        <option value="https://www.k-heritage.tv">국가유산채널</option>
+                        <option value="https://www.kh.or.kr/visit">국가유산 방문 캠페인</option>
+                        <option value="https://jrtf.or.kr/">조선왕릉문화제</option>
+                    </select>
+                </label>
+            </form>
+            <hr>
+            <div class="public">
+                <a href="https://www.kh.or.kr/combine/brd/1079/history/705">개인정보처리방침</a>
+                <a href="https://www.kh.or.kr/cms/content/view/706">이용약관</a>
+            </div>
+            <address>한국문화재재단 서울특별시 종로구 율곡로 53 (안국동 148)</address>
+            <div class="question">
+                <address class="tel">일반문의전화 1522-2295</address>
+                <address class="tel2">홍보 취재문의 02-3210-4683</address>
+            </div>
+            <div class="copyright">
+                <p>&copy;2020 Korea Cultural Heritage Foundation, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function navigateToSite() {
+            var select = document.getElementById('sitemap');
+            var url = select.options[select.selectedIndex].value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
+    </script>
+</body>
+</html>
