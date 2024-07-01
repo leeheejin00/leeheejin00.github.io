@@ -1,0 +1,166 @@
+@mixin responsive($break) {
+    @if $break == small-screens {
+        @media (min-width: $break-small) { 
+            @content; 
+        }
+    }
+    @else if $break == large-screens {
+        @media (min-width: $break-large) { 
+            @content; 
+        }
+    }
+}
+
+@mixin footer {
+    width: $width-wide;
+    text-align: center;
+    margin: auto;
+    color: white;
+    
+    .sns {
+        width: $width-wide;
+        height: 70px;
+        background-color: #ffbe0f;
+        display: flex;
+        justify-content: center;
+        width: $width-wide;
+        height: 67px;
+        @include responsive(large-screens) {
+            height: 66px;
+        }
+        a {
+            margin-top: 10px;
+            margin-right: 42px;
+            @include responsive(large-screens) {
+                margin-right: 20px;
+            }
+            img {
+                width: 48px;
+                transition: filter 0.3s ease;
+            }
+            &:hover img {
+                width: 58px;
+            }
+        }
+        a:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .footer-back {
+        background: url(../../images/footer-pattern-bg.png);
+
+        
+        @include responsive(large-screens) {
+            background: url(../../images/header_backpc.png);
+            background-size: cover;
+            background-color: #2f2411;
+        }
+
+        .footLogo {
+            a {
+                padding: 62px;
+                img {
+                    margin: 0 auto;
+                }
+            }
+        }
+        form {
+            text-align: center;
+            label {
+                select {
+                    border: 1px solid white;
+                    border-radius: 5px;
+                    padding-top: 3px;
+                    padding-bottom: 3px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    color: white;
+                    font-family: $font-pre-regular;
+                    font-size: 16px;
+                    background: transparent;
+                    width: 25%;
+                    option {
+                        color: black;
+                    }
+                    @include responsive(large-screens) {
+                        font-size: 21px;
+                        width: 10%;
+                    }
+                }
+            }
+        }
+    }
+ 
+    
+        hr {
+            width: 70%;
+            height: 3px;
+            background-color: #ffbe0f;
+            margin: 60px auto;
+        }
+        .public {
+            display: flex;
+            justify-content: center;
+            a {
+                font-size: 16px;
+                font-family: $font-regular;
+                margin-right: 42px;
+                margin-bottom: 46px;
+                color: white;
+                &:hover {
+                    color: #ffbe0f;
+                }
+                @include responsive(large-screens) {
+                    font-size: 20px;
+                }
+            }
+            a:last-child {
+                margin-right: 0;
+            }
+        }
+        address {
+            font-size: 14px;
+            text-align: center;
+            font-family: $font-pre-light;
+            @include responsive(large-screens) {
+                font-size: 18px;
+            }
+        }
+        .question {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            .tel1 {
+                    font-size: 14px;
+                    margin-right: 10px;
+                    margin-bottom: 34px;
+                    font-family: $font-extra;
+                    text-align: center;
+                    @include responsive(large-screens) {
+                        font-size: 18px;
+                    }
+                }
+                .tel2 {
+                    font-size: 14px;
+                    margin-left: 10px;
+                    margin-bottom: 34px;
+                    font-family: $font-extra;
+                    text-align: center;
+                    @include responsive(large-screens) {
+                        font-size: 18px;
+                    }
+                }
+                
+            }
+        .copyright {
+            p {
+                padding-bottom: 51px;
+                font-size: 14px;
+                font-family: $font-extra;
+                @include responsive(large-screens) {
+                    font-size: 16px;
+                }
+            }   
+        }
+}
