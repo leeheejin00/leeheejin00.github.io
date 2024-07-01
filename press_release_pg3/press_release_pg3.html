@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../header_footer/css/header_footer.css">
+    <link rel="stylesheet" href="./css/press_release_pg3.css">
+    <script src="./js/login.js"></script>
+    <script src="./js/loginTab.js"></script>
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.png">
+    <title>보도자료상세페이지</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchIcon = document.getElementById('searchIcon');
+            const searchInput = document.getElementById('searchInput');
+
+            searchIcon.addEventListener('click', function() {
+                const query = searchInput.value;
+                if (query === '경복궁') {
+                    window.location.href = '../index_search/index_search.html';
+                } else {
+                    alert('Please enter "경복궁" to search.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('languageIcon').addEventListener('click', function(event) {
+        event.preventDefault();
+        var languageSelect = document.getElementById('languageSelect');
+        if (languageSelect.style.display === 'none' || languageSelect.style.display === '') {
+            languageSelect.style.display = 'block';
+        } else {
+            languageSelect.style.display = 'none';
+        }
+    });
+    </script>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var searchIcon = document.getElementById("searchIcon");
+        var searchInput = document.getElementById("searchInput");
+
+        searchIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (searchInput.style.display === "none" || searchInput.style.display === "") {
+                searchInput.style.display = "block";
+                searchInput.focus();
+            } else {
+                searchInput.style.display = "none";
+            }
+        });
+
+        document.addEventListener("click", function(event) {
+            if (!searchInput.contains(event.target) && !searchIcon.contains(event.target)) {
+                searchInput.style.display = "none";
+            }
+        });
+    });
+    </script>
+
+    <script>
+        function submitForm() {
+            document.querySelector('form').submit();
+        }
+
+        function validateSearch() {
+            const searchInput = document.getElementById('find').value.trim();
+            if (searchInput === '') {
+                alert('검색어를 입력하세요.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            const toggleBtn = document.querySelector('.menu-toggle-btn');
+            const sideMenu = document.getElementById('side-menu');
+            const closeBtn = document.querySelector('.close-btn');
+
+            toggleBtn.addEventListener('click', function() {
+                if (sideMenu.style.right === '0px') {
+                    sideMenu.style.right = '-50%'; 
+                    toggleBtn.classList.remove('open'); 
+                } else {
+                    sideMenu.style.right = '0'; 
+                    toggleBtn.classList.add('open'); 
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                sideMenu.style.right = '-50%'; 
+                toggleBtn.classList.remove('open'); 
+            });
+        };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const menuItems = document.querySelectorAll('.gnb > li > a');
+        const header = document.querySelector('header');
+
+        menuItems.forEach(item => {
+            item.addEventListener('mouseover', function (e) {
+                e.preventDefault();
+                const submenu = this.nextElementSibling;
+                let allSubmenus = document.querySelectorAll('.submenu');
+
+                // Close all submenus except the current one
+                allSubmenus.forEach(sub => {
+                    if (sub !== submenu) {
+                        sub.classList.remove('open');
+                        sub.style.maxHeight = null;
+                    }
+                });
+
+                // Toggle the clicked submenu
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.toggle('open');
+                    if (submenu.classList.contains('open')) {
+                        submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    } else {
+                        submenu.style.maxHeight = null;
+                    }
+
+                    // Adjust header height
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
+                }
+            });
+
+            item.parentElement.addEventListener('mouseleave', function () {
+                const submenu = item.nextElementSibling;
+                if (submenu && submenu.classList.contains('submenu')) {
+                    submenu.classList.remove('open');
+                    submenu.style.maxHeight = null;
+
+                    // Adjust header height back to default
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        const allSubmenus = document.querySelectorAll('.submenu');
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
+                }
+            });
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-icon">
+                <a href="../index.html"><img src="../images/header_logo.png" alt="header_logo"></a>
+                
+                <div class="search-menu">
+                    <div style="display: flex; align-items: center;">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ko">Korean</option>
+                            <option value="jp">Japanese</option>
+                        </select>
+                        <a href="#" id="intranet-icon"><img src="../images/internet.png" alt=""></a>
+                    </div>
+                    <a href="#" id="login-toggle"><img src="../images/korean-hat.png" alt=""></a>
+                    <a href="#"><img id="searchIcon" src="../images/search.png" alt="search"></a>
+                    <div class="menu-toggle-btn">
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                        <span>&nbsp</span>
+                    </div>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+                </div> <!-- search-menu -->
+            </div> <!-- logo-icon -->
+            <script>
+                document.getElementById('intranet-icon').addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default action of the anchor tag
+                    var selectMenu = document.getElementById('language-select');
+                    if (selectMenu.style.display === 'none' || selectMenu.style.display === '') {
+                        selectMenu.style.display = 'block';
+                    } else {
+                        selectMenu.style.display = 'none';
+                    }
+                });
+                </script>
+            <div id="side-menu" class="side-menu">
+                <div class="language-login">
+                    <div class="language">
+                        <select id="language-select">
+                            <option value="en">English</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ko">Korean</option>
+                            <option value="jp">Japanese</option>
+                        </select>
+                    </div>
+                    <div class="login">
+                        <a href="#" id="mobile-login-toggle">로그인</a>
+                        <a href="#"><img src="../images/login-white.png" alt="login"></a>
+                    </div>
+                </div> 
+                <script>
+                    document.addEventListener('DOMContentLoaded', (event) => {
+                const languageSelect = document.getElementById('language-select');
+                
+                languageSelect.addEventListener('click', () => {
+                    languageSelect.size = languageSelect.size === 1 ? 4 : 1;
+                });
+                
+                languageSelect.addEventListener('blur', () => {
+                    languageSelect.size = 1;
+                });
+            });
+                </script>
+                <nav class="side-nav">
+                    <ul class="gnb">
+                        <li>
+                            <a href="#"><img src="./images/side-menu-icon.png" alt="">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="../main-info/main-info.html">소개·연혁</a></li>
+                                <li><a href="../fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li class="palace-menu">
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">서울 속 고궁</a>
+                            <ul class="submenu">
+                                <div class="palace1">
+                                    <li><a href="../place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="../place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="../place_detail/place_detail_03.html">덕수궁</a></li>
+                                </div>
+                                <div class="palace2">
+                                    <li><a href="../place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="../place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="../place_detail/place_detail_06.html">종묘</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="../gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="../gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="../notice/notice.html">공지사항</a></li>
+                                <li><a href="../press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../images/side-menu-icon.png" alt="">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="../booking/booking.html">예매하기</a></li>
+                                <li><a href="../booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu_box">
+                <nav class="mainmenu">
+                    <ul class="gnb">
+                        <li>
+                            <a href="#">궁중문화축전</a>
+                            <ul class="submenu">
+                                <li><a href="../main-info/main-info.html">소개.연혁</a></li>
+                                <li><a href="../fi-intro/fi-intro.html">FI</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">서울 속 고궁</a>
+                                <ul class="submenu">
+                                    <li><a href="../place_detail/place_detail_01.html">경복궁</a></li>
+                                    <li><a href="../place_detail/place_detail_02.html">창덕궁</a></li>
+                                    <li><a href="../place_detail/place_detail_03.html">덕수궁</a></li>
+                                    <li><a href="../place_detail/place_detail_04.html">창경궁</a></li>
+                                    <li><a href="../place_detail/place_detail_05.html">경희궁</a></li>
+                                    <li><a href="../place_detail/place_detail_06.html">종묘</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">궁이둥이</a>
+                            <ul class="submenu">
+                                <li><a href="../gungdoong/gungdoong.html">지원하기</a></li>
+                                <li><a href="../gungdoong_gallery/gungdoong_gallery.html">발자취</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <ul class="submenu">
+                                <li><a href="../notice/notice.html">공지사항</a></li>
+                                <li><a href="../press_release/press_release.html">보도자료</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">예매하기</a>
+                            <ul class="submenu">
+                                <li><a href="../booking/booking.html">예매하기</a></li>
+                                <li><a href="../booking_my/booking_my.html">예매확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <form action="../index_search/index_search.html" method="get" onsubmit="return validateSearch()">
+                    <div class="search-box">
+                        <label for="find"></label>
+                        <input type="search" id="find" name="find" value="경복궁" />
+                        <div class="search" onclick="submitForm()">
+                            <img src="../images/search.png" alt="Search">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div class="modal-overlay"></div>   
+
+        <div class="form">
+    
+            <ul class="tab-group">
+              <li class="tab active"><a href="#signup">회원가입</a></li>
+              <li class="tab"><a href="#login">로그인</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div id="signup">   
+                <h1>무료로 회원가입 하세요!</h1>
+                
+                <form action="/" method="post">
+                
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>
+                      성<span class="req">*</span>
+                    </label>
+                    <input type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label>
+                      이름<span class="req">*</span>
+                    </label>
+                    <input type="text"required autocomplete="off"/>
+                  </div>
+                </div>
+      
+                <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email"required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호 설정<span class="req">*</span>
+                  </label>
+                  <input type="password"required autocomplete="off"/>
+                </div>
+                
+                <button type="submit" class="button button-block">Get Started</button>
+                
+                </form>
+      
+              </div>
+              
+              <div id="login">   
+                <h1>환영합니다!</h1>
+                
+                <form id="login-form" action="login.php" method="post">
+                
+                  <div class="field-wrap">
+                  <label>
+                    이메일 주소<span class="req">*</span>
+                  </label>
+                  <input type="email" id="login-email" name="login-email" required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    비밀번호<span class="req">*</span>
+                  </label>
+                  <input type="password" id="login-password" name="login-password" required autocomplete="off"/>
+                </div>
+                
+                <p class="forgot"><a href="#">혹시 비밀번호를 잊으셨나요?</a></p>
+                
+                <button class="button button-block">Log In</button>
+                
+                </form>
+      
+              </div>
+              
+            </div><!-- tab-content -->
+            
+      </div> <!-- /form -->
+    <main>
+        <div class="press_release_pg">
+            <div class="container">
+                <h2>보도자료</h2>
+                <div class="news_pg">
+                    <div class="top_box"></div>
+                    <div class="small_info">
+                        <p>작성자 : 궁중문화축전관리자</p>
+                        <p>2024-03-18</p>
+                    </div>
+                    <div class="sub_title">
+                        <strong>[24. 3. 18] 5대 궁궐 무제한 입장권 ‘궁패스’ 국내외 판매 시작</strong>
+                    </div>
+                    <div class="gray_box"></div>
+                    <div class="news_main">
+                        <h3>5대 궁궐 무제한 입장권 ‘궁패스’ 국내외 판매 시작</h3>
+                        <div class="news_img">
+                            <img src="./images/press_release_pg5.png" alt="press_release_pg5">
+                        </div>
+                        <div class="sub_info_box">
+                            <p class="sub_info">3월 18일부터 4월 26일까지 국내외 온라인 플랫폼 판매</p>
+                        </div>
+                        <hr class="top_line">
+
+                        <p>문화재청 궁능유적본부(본부장 직무대리 송인헌)와 한국문화재재단(이사장 최영창)은 궁중문화축전 특별 관람권인 ‘궁패스’의 판매를 오는 18일 시작한다. ‘궁패스’는 18일부터 4월 26일까지 ‘티켓링크’와 ‘클룩’ 등의 해외 플랫폼을 통해 판매된다.</p>
+
+                        <p>‘궁중문화축전’은 매년 봄·가을 서울의 5대 궁궐(경복궁⸱창덕궁⸱덕수궁⸱창경궁⸱경희궁)과 종묘에서 열리는 국내 최대 규모의 문화유산 축제로 올해 10주년을 맞이한다. 올해 열리는 제10회 궁중문화축전은 봄⸱가을 연 2회 개최되며, 봄 궁중문화축전은 오는 4월 27일부터 5월 5일까지, 9일간 진행된다.</p>
+
+                        <p>‘궁패스’는 봄 축전 기간 동안 서울의 5대 궁궐을 횟수의 제한 없이 입장할 수 있는 궁중문화축전 특별 관람권으로, 판매가격은 1만원이다. 사전 구매한 궁패스는 인천국제공항과 궁궐별 안내부스에서 현장수령한 후 이용 가능하다.</p>
+
+                        <p>올해 궁패스에는 다양한 혜택을 포함했다. 카드 형태의 궁패스에 티머니(T-money) 교통카드 기능을 탑재하여 봄 궁중문화축전 기간이 종료되어도 교통카드로 지속적으로 사용할 수 있으며, 궁중문화축전 10주년을 기념하여 3천원이 자동 충전되어 제공된다. 이 외에도, ▲ 궁궐 및 인천국제공항 내 ‘문화상품관 사랑’의 문화상품 및 제조음료 10% 할인, ▲ 한국의집 한정식 메뉴 10% 할인, ▲ 세종문화회관 뮤지컬 &lt;더 트라이브 30% 할인 등 다양한 제휴할인 혜택도 포함된다.</p>
+
+
+                        <p>‘궁패스’를 시범 도입한 지난해에는 내국인을 대상으로 1천장을 판매하였으나, 작년 인기에 힘입어 올해에는 관람객들에게 더 많은 기회를 제공하고자 1만장으로 판매 수량을 대폭 확대하여 국내외 플랫폼에서 판매한다.</p>
+
+                        <p>‘궁패스’는 글로벌 여행 플랫폼을 통해 3월 18일부터 구입 가능하다. 클룩(Klook), 트립포즈, 트래블노트를 시작으로 케이케이데이(KKday), 졸리바이(JollyBuy), 이모토 와이파이(イモト WIFI), 한유망(韓遊網) 등에서 순차적으로 진행된다. 또한, 국내 예매 플랫폼 ‘티켓링크’를 통해서는 4월 5일부터 예매 가능하다. ‘티켓링크’를 통해 예매한 얼리버드 고객 200명에 한해 4월 26일 개최되는 궁중문화축전 개막제 관람권이 제공된다.</p>
+
+                        <p>온라인 미판매분이 발생할 경우에 현장 판매도 진행될 예정이다. 궁패스와 관련된 자세한 사항은 한국문화재재단 누리집(www.chf.or.kr)과 궁중문화축전 누리집(www.chf.or.kr/fest)을 참조하면 된다.</p>
+                        
+
+                        <hr class="bot_line">
+
+                    </div><!--news_main-->
+
+                </div><!--news_pg-->
+
+                <div class="list_box">
+                    <div class="list">
+                        <a href="../press_release/press_release.html">목록</a>
+                    </div>
+                    
+                </div>
+            </div><!--container-->
+        </div><!--press_release_pg-->
+    </main>
+
+    <footer>
+        <div class="sns">
+            <a href="https://www.instagram.com/royalculturefestival_official/"><img src="../images/instagram.png" alt="instagram"></a>
+            <a href="https://www.youtube.com/channel/UC1_vDkQlNg0zjj-EQRXapww?view_as=subscriber"><img src="../images/youtube.png" alt="youtube"></a>
+            <a href="https://blog.naver.com/royalculture"><img src="../images/naver blog.png" alt="blog"></a>
+        </div>
+        <div class="footer-back">
+            <div class="footLogo">
+                <a href="../index.html"><img src="../images/footer_logo.png" alt=""></a>
+            </div>
+            <form action="">
+                <label for="sitemap" class="custom-select">
+                    <select name="sitemap" id="sitemap" onchange="navigateToSite()">
+                        <option value="sitemap" selected>사이트맵</option>
+                        <option value="https://www.kh.or.kr/kha">국가유산진흥원</option>
+                        <option value="https://www.kh.or.kr/kh">한국의집</option>
+                        <option value="https://www.khmall.or.kr/">KHMALL(문화상품)</option>
+                        <option value="https://www.kh.or.kr/bhse">매장유산국비발굴단</option>
+                        <option value="https://www.k-heritage.tv">국가유산채널</option>
+                        <option value="https://www.kh.or.kr/visit">국가유산 방문 캠페인</option>
+                        <option value="https://jrtf.or.kr/">조선왕릉문화제</option>
+                    </select>
+                </label>
+            </form>
+            <hr>
+            <div class="public">
+                <a href="https://www.kh.or.kr/combine/brd/1079/history/705">개인정보처리방침</a>
+                <a href="https://www.kh.or.kr/cms/content/view/706">이용약관</a>
+            </div>
+            <address>한국문화재재단 서울특별시 종로구 율곡로 53 (안국동 148)</address>
+            <div class="question">
+                <address class="tel">일반문의전화 1522-2295</address>
+                <address class="tel2">홍보 취재문의 02-3210-4683</address>
+            </div>
+            <div class="copyright">
+                <p>&copy;2020 Korea Cultural Heritage Foundation, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function navigateToSite() {
+            var select = document.getElementById('sitemap');
+            var url = select.options[select.selectedIndex].value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
+        </script>
+</body>
+</html>
