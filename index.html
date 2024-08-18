@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
+    <title>궁중문화축전</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/loginTab.js"></script>
-    <title>index</title>
+    <script src="./js/index.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchIcon = document.getElementById('searchIcon');
@@ -76,6 +80,21 @@
     </script>
 
     <script>
+        function submitForm() {
+            document.querySelector('form').submit();
+        }
+
+        function validateSearch() {
+            const searchInput = document.getElementById('find').value.trim();
+            if (searchInput === '') {
+                alert('검색어를 입력하세요.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
         const menuItems = document.querySelectorAll('.gnb > li > a');
         
@@ -84,6 +103,7 @@
                 e.preventDefault();
                 const submenu = this.nextElementSibling;
 
+                // 모든 서브메뉴를 닫기
                 document.querySelectorAll('.submenu').forEach(sub => {
                     if (sub !== submenu) {
                         sub.classList.remove('open');
@@ -91,6 +111,7 @@
                     }
                 });
 
+                // 클릭한 서브메뉴 토글
                 if (submenu && submenu.classList.contains('submenu')) {
                     submenu.classList.toggle('open');
                     if (submenu.classList.contains('open')) {
@@ -199,6 +220,7 @@
             <source src="./mainvideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+
         <div class="container">
             <div class="logo-icon">
                 <a href="./index.html"><img src="./images/header-white-logo.png" alt="header_logo"></a>
@@ -232,7 +254,7 @@
                         selectMenu.style.display = 'none';
                     }
                 });
-                </script>
+            </script>
 
             <div id="side-menu" class="side-menu">
                 <div class="language-login">
@@ -541,57 +563,45 @@
             </div>
             <script>
                 const images = document.querySelectorAll('.mo-palace-box1, .mo-palace-box2, .mo-palace-box3, .mo-palace-box4, .mo-palace-box5, .mo-palace-box6');
-                const texts = document.querySelectorAll('.palace-slide1, .palace-slide2, .palace-slide3, .palace-slide4, .palace-slide5, .palace-slide6');
-                
+                const texts = document.querySelectorAll('.palace-slide1, .palace-slide2, .palace-slide3, .palace-slide4, .palace-slide5, .palace-slide6');              
                 let currentSlide = 0;
                 const slideInterval1 = 2000;
-                let interval;
-            
+                let interval;           
                 function showSlide1(index) {
                     images.forEach(img => img.style.display = 'none');
                     texts.forEach(text => text.style.display = 'none');
-
                     images[index].style.display = 'block';
                     texts[index].style.display = 'block';
-                }
-            
+                }           
                 function nextSlide1() {
                     currentSlide = (currentSlide + 1) % images.length;
                     showSlide1(currentSlide);
-                }
-            
+                }           
                 function prevSlide2() {
                     currentSlide = (currentSlide - 1 + images.length) % images.length;
                     showSlide1(currentSlide);
-                }
-            
+                }           
                 function startSlideShow() {
                     interval = setInterval(nextSlide1, slideInterval1);
-                }
-            
+                }           
                 function stopSlideShow() {
                     clearInterval(interval);
                 }
-
                 showSlide1(currentSlide);
                 startSlideShow();
-
                 images.forEach(img => {
                     img.addEventListener('mouseover', stopSlideShow);
                     img.addEventListener('mouseout', startSlideShow);
-                });
-            
+                });          
                 texts.forEach(text => {
                     text.addEventListener('mouseover', stopSlideShow);
                     text.addEventListener('mouseout', startSlideShow);
                 });
-
                 document.getElementById('prevSlide2').addEventListener('click', () => {
                     stopSlideShow();
                     prevSlide2();
                     startSlideShow();
-                });
-            
+                });          
                 document.getElementById('nextSlide1').addEventListener('click', () => {
                     stopSlideShow();
                     nextSlide1();
@@ -604,7 +614,6 @@
                 const options = {
                     threshold: 0.5
                 };
-
                 function initObserver() {
                     const observer = new IntersectionObserver((entries, observer) => {
                         entries.forEach(entry => {
@@ -613,27 +622,21 @@
                                 observer.unobserve(entry.target);
                             }
                         });
-                    }, options);
-
-                    
+                    }, options);                
                     const palacTxt1 = document.querySelector('.palace-txt1');
                     const palaceTxt2 = document.querySelector('.palace-txt2');
               
                     palacTxt1.classList.add('slide-in-left');
                     palaceTxt2.classList.add('slide-in-left');
-
                     observer.observe(palacTxt1);
                     observer.observe(palaceTxt2);
                 }
-
                 function checkScreenSize() {
                     if (window.innerWidth >= 768) {
                         initObserver();
                     }
                 }
-
                 checkScreenSize();
-
                 window.addEventListener('resize', checkScreenSize);
             });
             </script>
@@ -855,7 +858,7 @@
                         </ul>
                     </div>
                 </div>
-                <a href="./place_detail/place_detail_01.html">
+                <a href="../place_detail/place_detail_01.html">
                     <div class="palace-img1">
                         <img src="./images/palace-img1.png" alt="palace-img1">
                         <img src="./images/palace-img2.png" alt="palace-img2">
@@ -863,7 +866,7 @@
                         <img src="./images/palace-img4.png" alt="palace-img4">
                     </div>
                 </a>
-                <a href="./place_detail/place_detail_02.html">
+                <a href="../place_detail/place_detail_02.html">
                     <div class="palace-img2">
                         <img src="./images/chang1.jpg">
                         <img src="./images/chang2.jpg" alt="palace-img2">
@@ -871,7 +874,7 @@
                         <img src="./images/chang4.jpg" alt="palace-img4">
                     </div>
                 </a>
-                <a href="./place_detail/place_detail_03.html">
+                <a href="../place_detail/place_detail_03.html">
                     <div class="palace-img3">
                         <img src="./images/duc1.jpg">
                         <img src="./images/duc2.jpg" alt="palace-img2">
@@ -879,7 +882,7 @@
                         <img src="./images/duc4.jpg" alt="palace-img4">
                     </div>
                 </a>
-                <a href="./place_detail/place_detail_04.html">
+                <a href="../place_detail/place_detail_04.html">
                     <div class="palace-img4">
                         <img src="./images/changkyung1.jpg">
                         <img src="./images/changkyung2.jpg" alt="palace-img2">
@@ -887,7 +890,7 @@
                         <img src="./images/changkyung4.jpg" alt="palace-img4">
                     </div>
                 </a>
-                <a href="./place_detail/place_detail_05.html">
+                <a href="../place_detail/place_detail_05.html">
                     <div class="palace-img5">
                         <img src="./images/kyung1.JPG">
                         <img src="./images/kyung2.jpg" alt="palace-img2">
@@ -895,7 +898,7 @@
                         <img src="./images/kyung4.jpg" alt="palace-img4">
                     </div>
                 </a>
-                <a href="./place_detail/place_detail_06.html">
+                <a href="../place_detail/place_detail_06.html">
                     <div class="palace-img6">
                         <img src="./images/jongmo1.jpg">
                         <img src="./images/jongmo2.jpg" alt="palace-img2">
@@ -904,21 +907,21 @@
                     </div>
                 </a>
                 <div class="palace-img-pc">
-                    <a href="./place_detail/place_detail_06.html"><h2 class="palace-history">종 묘</h2></a>
-                    <a href="../place_detail/place_detail_01.html" class="img-container1">
-                        <img src="./images/palace-img1.png" alt="palace-img1" class="img1">
-                        <div class="overlay-text">경 복 궁</div>
-                    </a>
-                    <a href="./place_detail/place_detail_05.html" class="img-container2">
+                        <a href="../place_detail/place_detail_06.html"><h2 class="palace-history">종 묘</h2></a>
+                        <a href="../place_detail/place_detail_01.html" class="img-container1">
+                            <img src="./images/palace-img1.png" alt="palace-img1" class="img1">
+                            <div class="overlay-text">경 복 궁</div>
+                        </a>
+                    <a href="../place_detail/place_detail_05.html" class="img-container2">
                         <img src="./images/palace-img2.png" alt="palace-img2" class="img2">
                         <div class="overlay-text">경 희 궁</div>
                     </a>
-                    <a href="./place_detail/place_detail_03.html"><h2 class="palace">덕 수 궁</h2></a>
+                    <a href="../place_detail/place_detail_03.html"><h2 class="palace">덕 수 궁</h2></a>
                     <a href="../place_detail/place_detail_02.html" class="img-container3">
                         <img src="./images/palace-img3.png" alt="palace-img3" class="img3">
                         <div class="overlay-text">창 덕 궁</div>
                     </a>
-                    <a href="./place_detail/place_detail_04.html" class="img-container4">
+                    <a href="../place_detail/place_detail_04.html" class="img-container4">
                         <img src="./images/palace-img4.png" alt="palace-img4" class="img4">
                         <div class="overlay-text">창 경 궁</div>
                     </a>
@@ -955,6 +958,7 @@
                 });
             });
 
+            // Initialize the first palace section
             showPalace(0);
         });
         </script>
@@ -974,11 +978,13 @@
                 });
             }, options);
 
+            // const palacehistory = document.querySelector('.palace-history')
             const img1 = document.querySelector('.img1');
             const img2 = document.querySelector('.img2');
             const img3 = document.querySelector('.img3');
             const img4 = document.querySelector('.img4');
 
+            // palacehistory.classList.add('slide-in-right')
             img1.classList.add('slide-in-left');
             img2.classList.add('slide-in-right');
             img3.classList.add('slide-in-top');
@@ -990,6 +996,7 @@
             observer.observe(img4);
         });
         </script>
+
     </main>
 
     <footer>

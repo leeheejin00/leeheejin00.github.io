@@ -2173,6 +2173,9 @@ main .intro-imgbox a:hover .overlay2 .palace2024 {
     grid-area: e;
     position: relative;
   }
+  #history .palace-img-pc .img-container3 .img3 {
+    height: 290px;
+  }
   #history .palace-img-pc .img-container3 .overlay-text {
     display: none;
   }
