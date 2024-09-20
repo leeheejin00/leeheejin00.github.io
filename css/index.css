@@ -849,7 +849,11 @@ header .logo-icon .search-menu a:first-child {
 header .logo-icon .search-menu a:nth-child(2) {
   display: none;
 }
+header .logo-icon .search-menu #language-select {
+  display: none;
+}
 header .logo-icon .search-menu .menu-toggle-btn {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -859,6 +863,22 @@ header .logo-icon .search-menu .menu-toggle-btn span {
   width: 25px;
   height: 3px;
   background-color: white;
+}
+header .logo-icon .search-menu .menu-toggle-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+header .logo-icon .search-menu .menu-toggle-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+header .logo-icon .search-menu .menu-toggle-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+header .logo-icon .search-menu .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
 }
 @media (min-width: 1024px) {
   header .logo-icon .search-menu a:first-child {
