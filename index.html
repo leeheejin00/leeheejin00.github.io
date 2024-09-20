@@ -12,7 +12,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/loginTab.js"></script>
-    <script src="./js/index.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchIcon = document.getElementById('searchIcon');
@@ -21,29 +20,14 @@
             searchIcon.addEventListener('click', function() {
                 const query = searchInput.value;
                 if (query === '경복궁') {
-                    window.location.href = './index_search/index_search.html';
+                    window.location.href = '../index_search/index_search.html';
                 } else {
                     alert('Please enter "경복궁" to search.');
                 }
             });
         });
     </script>
-    <script>
-        window.onload = function() {
-            const toggleBtn = document.querySelector('.menu-toggle-btn');
-            const sideMenu = document.getElementById('side-menu');
 
-            toggleBtn.addEventListener('click', function() {
-                 if (sideMenu.style.right === '0px') {
-                    sideMenu.style.right = '-250px'; 
-                    toggleBtn.classList.remove('open'); 
-                } else {
-                    sideMenu.style.right = '0'; 
-                    toggleBtn.classList.add('open'); 
-                }
-            });
-        };
-    </script>
     <script>
         document.getElementById('languageIcon').addEventListener('click', function(event) {
         event.preventDefault();
@@ -95,23 +79,46 @@
     </script>
 
     <script>
+        window.onload = function() {
+            const toggleBtn = document.querySelector('.menu-toggle-btn');
+            const sideMenu = document.getElementById('side-menu');
+            const closeBtn = document.querySelector('.close-btn');
+
+            toggleBtn.addEventListener('click', function() {
+                if (sideMenu.style.right === '0px') {
+                    sideMenu.style.right = '-50%'; 
+                    toggleBtn.classList.remove('open'); 
+                } else {
+                    sideMenu.style.right = '0'; 
+                    toggleBtn.classList.add('open'); 
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                sideMenu.style.right = '-50%'; 
+                toggleBtn.classList.remove('open'); 
+            });
+        };
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
         const menuItems = document.querySelectorAll('.gnb > li > a');
-        
+        const header = document.querySelector('header');
+
         menuItems.forEach(item => {
             item.addEventListener('mouseover', function (e) {
                 e.preventDefault();
                 const submenu = this.nextElementSibling;
+                let allSubmenus = document.querySelectorAll('.submenu');
 
-                // 모든 서브메뉴를 닫기
-                document.querySelectorAll('.submenu').forEach(sub => {
+                allSubmenus.forEach(sub => {
                     if (sub !== submenu) {
                         sub.classList.remove('open');
                         sub.style.maxHeight = null;
                     }
                 });
 
-                // 클릭한 서브메뉴 토글
                 if (submenu && submenu.classList.contains('submenu')) {
                     submenu.classList.toggle('open');
                     if (submenu.classList.contains('open')) {
@@ -119,6 +126,16 @@
                     } else {
                         submenu.style.maxHeight = null;
                     }
+
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
                 }
             });
 
@@ -127,6 +144,17 @@
                 if (submenu && submenu.classList.contains('submenu')) {
                     submenu.classList.remove('open');
                     submenu.style.maxHeight = null;
+
+                    setTimeout(() => {
+                        let totalHeight = 180; 
+                        const allSubmenus = document.querySelectorAll('.submenu');
+                        allSubmenus.forEach(sub => {
+                            if (sub.classList.contains('open')) {
+                                totalHeight += sub.scrollHeight;
+                            }
+                        });
+                        header.style.height = totalHeight + "px";
+                    }, 300); 
                 }
             });
         });
@@ -232,7 +260,7 @@
                             <option value="ko">Korean</option>
                             <option value="jp">Japanese</option>
                         </select>
-                        <a href="#" id="intranet-icon"><img src="./images/language-white.png" alt=""></a>
+                        <a href="#" id="intranet-icon"><img src="./images/language-white.png" alt="language-white"></a>
                     </div>
                     <a href="#" id="login-toggle"><img src="./images/login-white.png" alt=""></a>
                     <a href=""><img id="searchIcon" src="./images/main-search-white.png" alt="search"></a>
@@ -244,7 +272,7 @@
                     <input type="text" id="searchInput" class="search-input" placeholder="Search...">
                 </div> <!-- search-menu -->
             </div> <!-- logo-icon -->
-            <script>
+            <!-- <script>
                 document.getElementById('intranet-icon').addEventListener('click', function(event) {
                     event.preventDefault();
                     var selectMenu = document.getElementById('language-select');
@@ -254,7 +282,7 @@
                         selectMenu.style.display = 'none';
                     }
                 });
-            </script>
+            </script> -->
 
             <div id="side-menu" class="side-menu">
                 <div class="language-login">
